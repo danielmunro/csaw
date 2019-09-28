@@ -141,9 +141,6 @@ ClientReadBuffers *read_client_buffers(Server *s) {
             if (buffer) {
                 clientReadBuffers->buffers[read_buf_index] = create_client_buffer(s->clients[i], buffer);
                 read_buf_index++;
-                if (read_buf_index > MAX_READ_BUFFER) {
-                    read_buf_index = 0;
-                }
             }
         }
     }
