@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 2.6)
 project (CSaw)
-add_executable(csaw src/main.c)
+add_executable(csaw src/main.c src/event/event.h)
 
 find_package(PostgreSQL REQUIRED)
 target_link_libraries(csaw PRIVATE ${PostgreSQL_LIBRARIES})

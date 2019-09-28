@@ -6,3 +6,5 @@
 #include "db/db.h"
 #include "mob/mob.h"
 #include "socket/socket.h"
+#include "event/event.h"
+#include "game_service.c"

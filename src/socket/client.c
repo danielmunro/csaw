@@ -5,6 +5,7 @@ typedef struct {
     int socket;
     char * buffer[MAX_INPUT];
     int buffer_index;
+    int delay;
 } Client;
 
 Client *new_client(struct sockaddr_in address, int socket) {
@@ -12,6 +13,7 @@ Client *new_client(struct sockaddr_in address, int socket) {
     c->address = address;
     c->socket = socket;
     c->buffer_index = 0;
+    c->delay = 0;
     return c;
 }
 

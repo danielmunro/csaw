@@ -112,6 +112,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/danmunro/github/csaw/src/event/event.h">
+			<Option target="csaw"/>
+		</Unit>
 		<Unit filename="/Users/danmunro/github/csaw/src/main.c">
 			<Option target="csaw"/>
 		</Unit>

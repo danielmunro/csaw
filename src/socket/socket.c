@@ -11,7 +11,7 @@ typedef struct {
     struct sockaddr_in address;
 } Server;
 
-Server *new_server() {
+Server *create_server() {
     return malloc(sizeof(Server));
 }
 
@@ -114,7 +114,7 @@ void select_sockets(Server *s) {
 
 void read_client_buffers(Server *s) {
     for (int i = 0; i < MAX_CLIENTS; i++) {
-        if (s->clients[i]) {
+        if (s->clients[i] && s->clients[i]->delay == 0) {
             char *buffer = get_next_buffer(s->clients[i]);
             if (buffer) {
                 send(s->clients[i]->socket, buffer, strlen(buffer), 0);
@@ -124,23 +124,18 @@ void read_client_buffers(Server *s) {
 }
 
 void loop_server(Server *s) {
-    while (1) {
-        FD_ZERO(&s->reading_fds);
-        FD_SET(s->main_socket, &s->reading_fds);
-        for (int i = 0; i < MAX_CLIENTS; i++) {
-            if (s->clients[i]) {
-                int sd = s->clients[i]->socket;
-                if (sd > 0) {
-                    FD_SET(sd, &s->reading_fds);
-                }
-            }
+    FD_ZERO(&s->reading_fds);
+    FD_SET(s->main_socket, &s->reading_fds);
+    for (int i = 0; i < MAX_CLIENTS; i++) {
+        if (s->clients[i]) {
+            FD_SET(s->clients[i]->socket, &s->reading_fds);
         }
-        select_sockets(s);
-        if (FD_ISSET(s->main_socket, &s->reading_fds) && new_connection(s) < 0) {
-            perror("accept");
-            exit(1);
-        }
-        check_clients(s);
-        read_client_buffers(s);
     }
+    select_sockets(s);
+    if (FD_ISSET(s->main_socket, &s->reading_fds) && new_connection(s) < 0) {
+        perror("accept");
+        exit(1);
+    }
+    check_clients(s);
+    read_client_buffers(s);
 }

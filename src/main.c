@@ -1,9 +1,9 @@
 #include "header.h"
 
 void listen_csaw() {
-    Server *server = new_server();
-    open_main_socket(server);
-    loop_server(server);
+    GameService *game_service = create_game_service();
+    open_main_socket(game_service->server);
+    start_game_service(game_service);
 }
 
 int main() {
