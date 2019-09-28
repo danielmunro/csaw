@@ -8,3 +8,4 @@
 #include "socket/socket.h"
 #include "event/event.h"
 #include "game_service.c"
+#include "socket/event_consumer/echo_event_consumer.c"

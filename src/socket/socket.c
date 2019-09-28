@@ -15,6 +15,26 @@ Server *create_server() {
     return malloc(sizeof(Server));
 }
 
+typedef struct {
+    Client *client;
+    char * buffer;
+} ClientBuffer;
+
+ClientBuffer *create_client_buffer(Client *client, char * buffer) {
+    ClientBuffer *c = malloc(sizeof(ClientBuffer));
+    c->client = client;
+    c->buffer = buffer;
+    return c;
+}
+
+typedef struct {
+    ClientBuffer *buffers[MAX_CLIENTS];
+} ClientReadBuffers;
+
+ClientReadBuffers *create_client_read_buffers() {
+    return malloc(sizeof(ClientReadBuffers));
+}
+
 void open_main_socket(Server *s) {
     s->main_socket = socket(AF_INET, SOCK_STREAM, 0);
     int addrlen = sizeof(s->address);
@@ -112,15 +132,22 @@ void select_sockets(Server *s) {
     select(MAX_CLIENTS, &s->reading_fds, NULL, NULL, NULL);
 }
 
-void read_client_buffers(Server *s) {
+ClientReadBuffers *read_client_buffers(Server *s) {
+    ClientReadBuffers *clientReadBuffers = create_client_read_buffers();
+    int read_buf_index = 0;
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (s->clients[i] && s->clients[i]->delay == 0) {
             char *buffer = get_next_buffer(s->clients[i]);
             if (buffer) {
-                send(s->clients[i]->socket, buffer, strlen(buffer), 0);
+                clientReadBuffers->buffers[read_buf_index] = create_client_buffer(s->clients[i], buffer);
+                read_buf_index++;
+                if (read_buf_index > MAX_READ_BUFFER) {
+                    read_buf_index = 0;
+                }
             }
         }
     }
+    return clientReadBuffers;
 }
 
 void loop_server(Server *s) {
@@ -137,5 +164,4 @@ void loop_server(Server *s) {
         exit(1);
     }
     check_clients(s);
-    read_client_buffers(s);
 }

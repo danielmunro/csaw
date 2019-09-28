@@ -18,5 +18,13 @@ void start_game_service(GameService *g) {
     g->status = Running;
     while(g->status == Running) {
         loop_server(g->server);
+        ClientReadBuffers *clientReadBuffers = read_client_buffers(g->server);
+        for (int i = 0; i < MAX_CLIENTS; i++) {
+            if (clientReadBuffers->buffers[i]) {
+                Event *event = create_client_input_event(
+                        clientReadBuffers->buffers[i]->client, clientReadBuffers->buffers[i]->buffer);
+                dispatch_event(g->event_dispatcher, event);
+            }
+        }
     }
 }
