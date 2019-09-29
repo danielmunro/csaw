@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.15.3/bin/cmake
+CMAKE_COMMAND = cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.15.3/bin/cmake -E remove -f
+RM = cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/danmunro/github/csaw
+CMAKE_SOURCE_DIR = .
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/danmunro/github/csaw
+CMAKE_BINARY_DIR = .
 
 #=============================================================================
 # Targets provided globally by CMake.
