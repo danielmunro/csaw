@@ -1,7 +1,7 @@
 language: c
 compiler: gcc
 addons:
-  postgresql: "10"
+  postgresql: "11.5"
   apt:
     packages:
       - libpq-dev
