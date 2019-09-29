@@ -1,5 +1,3 @@
-#include <libpq-fe.h>
-
 void do_exit(PGconn *conn) {
     PQfinish(conn);
     exit(1);
