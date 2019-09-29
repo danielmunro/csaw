@@ -4,6 +4,9 @@
 #include <uuid/uuid.h>
 #include "uuid.c"
 #include "db/db.h"
+#include "action/action_type.c"
+#include "request/request.c"
+#include "action/action.h"
 #include "mob/mob.h"
 #include "socket/socket.h"
 #include "event/event.h"
