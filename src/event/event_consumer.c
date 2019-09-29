@@ -1,11 +1,11 @@
 typedef struct {
     enum EventType event_type;
-    void (*consumer)(Event *event);
+    void (*consume)(Event *event);
 } EventConsumer;
 
-EventConsumer *create_event_consumer(enum EventType event_type, void (*consumer)(Event *event)) {
+EventConsumer *create_event_consumer(enum EventType event_type, void (*consume)(Event *event)) {
     EventConsumer *event_consumer = malloc(sizeof(EventConsumer));
     event_consumer->event_type = event_type;
-    event_consumer->consumer = consumer;
+    event_consumer->consume = consume;
     return event_consumer;
 }

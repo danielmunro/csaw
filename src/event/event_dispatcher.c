@@ -11,7 +11,7 @@ EventDispatcher *create_event_dispatcher() {
 void dispatch_event(EventDispatcher *event_dispatcher, Event *event) {
     for (int i = 0; i < MAX_EVENT_CONSUMERS; i++) {
         if (event_dispatcher->consumers[i] && event_dispatcher->consumers[i]->event_type == event->event_type) {
-            event_dispatcher->consumers[i]->consumer(event);
+            event_dispatcher->consumers[i]->consume(event);
         }
     }
 }
