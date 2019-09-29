@@ -2,5 +2,8 @@ dist: bionic
 language: c
 compiler: gcc
 before_script:
-  - sudo apt-get install -y postgresql-10 postgresql-client-10 postgresql-contrib-10 postgresql-server-dev-10 libpq-dev
+  - sudo apt-get --yes remove postgresql
+  - sudo apt-get install -y postgresql-11 postgresql-client-11 libpq-dev
+  - sudo cp /etc/postgresql/{9.6,11}/main/pg_hba.conf
+  - sudo service postgresql restart 11
 script: cmake . && make && make test
