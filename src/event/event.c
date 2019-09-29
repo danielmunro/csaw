@@ -1,5 +1,6 @@
 typedef struct {
-    enum EventType event_type;
+    enum EventType type;
+    enum EventStatus status;
     Mob *mob;
     Client *client;
     char *buffer;
@@ -7,7 +8,8 @@ typedef struct {
 
 Event *create_event(enum EventType event_type) {
     Event *event = malloc(sizeof(Event));
-    event->event_type = event_type;
+    event->type = event_type;
+    event->status = Live;
     return event;
 }
 

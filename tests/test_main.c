@@ -14,4 +14,5 @@ int main() {
 
     // test_event_dispatcher
     test_dispatch_event_to_event_type();
+    test_terminated_event_stops_consuming();
 }
