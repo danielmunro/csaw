@@ -35,7 +35,6 @@
 *.i*86
 *.x86_64
 *.hex
-CSaw
 
 # Debug files
 *.dSYM/
@@ -56,3 +55,5 @@ CMakeFiles/
 .idea/
 Testing/
 CMakeCache.txt
+csaw
+test_csaw
