@@ -2,7 +2,7 @@ dist: bionic
 language: c
 compiler: gcc
 addons:
-  postgresql: "11"
+  postgresql: "9.6"
   apt:
     packages:
       - libpq-dev
