@@ -5,7 +5,7 @@ before_script:
   - cp CMakeLists.txt.travis CMakeLists.txt
 script: cmake . && make && make test
 addons:
-  postgresql: '9.4'
   apt:
     packages:
-      - postgresql-server-dev-9.4
+      - postgresql-server-dev
+      - libpq-dev
