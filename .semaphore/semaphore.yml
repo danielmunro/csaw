@@ -1,0 +1,22 @@
+version: v1.0
+name: Hello Semaphore
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: csaw
+    task:
+      env_vars:
+        - name: APP_ENV
+          value: prod
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - cmake .
+        - name: 'Job #2'
+          commands:
+            - make
+        - name: 'Job #3'
+          commands:
+            - make
