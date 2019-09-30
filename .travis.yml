@@ -7,5 +7,4 @@ script: cmake . && make && make test
 addons:
   apt:
     packages:
-      - postgresql-server-dev
       - libpq-dev
