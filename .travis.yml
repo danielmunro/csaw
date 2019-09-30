@@ -1,10 +1,32 @@
 dist: bionic
 language: c
 compiler: gcc
-before_script:
-  - cp CMakeLists.txt.travis CMakeLists.txt
 script: cmake . && make && make test
-addons:
-  apt:
-    packages:
-      - libpq-dev
+env:
+  matrix:
+    - PG=9.3
+    - PG=9.4
+    - PG=9.5
+    - PG=9.6
+    - PG=10
+    - PG=11
+
+before_install:
+  - sudo apt-get -y --purge remove postgresql libpq-dev libpq5
+    postgresql-client-common postgresql-common
+  - sudo rm -rf /var/lib/postgresql
+  - sudo apt-get update -qq
+  - sudo apt-get install -y
+    postgresql-${PG}
+    postgresql-client-${PG}
+    postgresql-${PG}-pgtap
+    postgresql-server-dev-${PG}
+    postgresql-server-dev-all
+    debhelper fakeroot
+    libtap-parser-sourcehandler-pgtap-perl
+  # Set PATH as postgresql-server-dev-all pretends version is 11
+  - export PATH=/usr/lib/postgresql/${PG}/bin:${PATH}
+
+before_script:
+  - sudo -u postgres createuser -s "$USER"
+  - sudo -u postgres createuser -s root
