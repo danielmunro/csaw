@@ -11,10 +11,13 @@ blocks:
         - name: APP_ENV
           value: prod
       jobs:
-        - name: clone git repo
+        - name: build and test
           commands:
             - 'git clone git@github.com:danielmunro/csaw.git'
             - cd csaw
             - cmake .
             - make
             - make test
+      prologue:
+        commands:
+          - sudo apt-get install libpq-dev
