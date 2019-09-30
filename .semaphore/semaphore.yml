@@ -20,4 +20,4 @@ blocks:
             - make test
       prologue:
         commands:
-          - sudo apt-get install libpq-dev
+          - sudo apt-get install libpq-dev postgresql-server-dev-10
