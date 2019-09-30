@@ -13,13 +13,8 @@ blocks:
       jobs:
         - name: clone git repo
           commands:
-            - 'git clone git@github.com:danielmunro/csaw.git && cd csaw'
-        - name: cmake
-          commands:
+            - 'git clone git@github.com:danielmunro/csaw.git'
+            - cd csaw
             - cmake .
-        - name: make
-          commands:
             - make
-        - name: ' make test'
-          commands:
             - make test
