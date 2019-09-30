@@ -1,6 +1,6 @@
 dist: bionic
 language: c
 compiler: gcc
-services:
-  - postgresql
+before_script:
+  - cp CMakeLists.txt.travis CMakeLists.txt
 script: cmake . && make && make test
