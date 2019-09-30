@@ -3,7 +3,9 @@
 #include <uuid/uuid.h>
 #include "uuid.c"
 #include "mob/mob.h"
+#ifndef MOCK
 #include "db/db.h"
+#endif
 #include "action/action_type.c"
 #include "request/request.c"
 #include "action/action.h"
