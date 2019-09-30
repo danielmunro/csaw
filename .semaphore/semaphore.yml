@@ -11,12 +11,15 @@ blocks:
         - name: APP_ENV
           value: prod
       jobs:
-        - name: 'Job #1'
+        - name: clone git repo
+          commands:
+            - 'git clone git@github.com:danielmunro/csaw.git && cd csaw'
+        - name: cmake
           commands:
             - cmake .
-        - name: 'Job #2'
+        - name: make
           commands:
             - make
-        - name: 'Job #3'
+        - name: ' make test'
           commands:
-            - make
+            - make test
