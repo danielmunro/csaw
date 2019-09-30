@@ -1,5 +1,3 @@
-#include "../mob/mob.h"
-
 Mob *hydrate_mob(PGresult *result, int row) {
     char * pEnd;
     return new_mob(

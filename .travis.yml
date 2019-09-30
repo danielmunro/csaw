@@ -3,6 +3,4 @@ language: c
 compiler: gcc
 services:
   - postgresql
-before_script:
-  - which cmake
-script: make && make test
+script: cmake . && make && make test
