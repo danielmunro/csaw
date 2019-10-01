@@ -20,6 +20,15 @@ ClientT *get_client(GameServiceT *game_service, int i) {
     return game_service->server->clients[i];
 }
 
+ActionT *get_action(GameServiceT *game_service, char *name_partial) {
+    for (int i = 0; i < MAX_ACTIONS; i++) {
+        if (game_service->action_table->actions[i] && strstr(game_service->action_table->actions[i]->name, name_partial) == 0) {
+            return game_service->action_table->actions[i];
+        }
+    }
+    return 0;
+}
+
 void dispatch_event(GameServiceT *game_service, Event *event) {
     for (int i = 0; i < MAX_EVENT_CONSUMERS; i++) {
         if (ready_to_consume(game_service->event_dispatcher->consumers[i], event)) {

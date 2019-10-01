@@ -1,7 +1,7 @@
 typedef struct {
     enum EventType event_type;
     enum EventStatus status;
-    Action *action;
+    ActionT *action;
     Mob *mob;
     ClientT *client;
     char *buffer;
@@ -21,7 +21,7 @@ Event *create_client_input_event(ClientT *client, char *buffer) {
     return event;
 }
 
-Event *create_action_event(Action *action) {
+Event *create_action_event(ActionT *action) {
     Event *event = create_event(ActionEventType);
     event->action = action;
     return event;

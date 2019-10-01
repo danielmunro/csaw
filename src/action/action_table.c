@@ -1,7 +1,7 @@
 #define MAX_ACTIONS 100
 
 typedef struct {
-    Action *actions[MAX_ACTIONS];
+    ActionT *actions[MAX_ACTIONS];
 } ActionTable;
 
 ActionTable *create_action_table() {

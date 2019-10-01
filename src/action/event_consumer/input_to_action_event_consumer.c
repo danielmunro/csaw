@@ -1,10 +1,14 @@
 void consume_input_to_action_event(GameServiceT *game_service, Event *event) {
     for (int i = 0; i < MAX_ACTIONS; i++) {
-        if (game_service->action_table->actions[i] && strstr(game_service->action_table->actions[i]->name, event->buffer) == 0) {
+        ActionT *action = get_action(game_service, event->buffer);
+        if (action) {
             Event *action_event = create_action_event(game_service->action_table->actions[i]);
             dispatch_event(game_service, action_event);
             if (action_event->status == LiveEventStatus) {
-
+                action->action(game_service, create_request(
+                        action->action_type,
+                        event->mob,
+                        event->buffer));
             }
         }
     }

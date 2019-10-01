@@ -1,12 +1,12 @@
 typedef struct {
-    enum ActionType request_type;
+    enum ActionType action_type;
     Mob *mob;
     char * buffer;
 } Request;
 
-Request *create_request(enum ActionType request_type, Mob *mob, char * buffer) {
+Request *create_request(enum ActionType action_type, Mob *mob, char * buffer) {
     Request *r = malloc(sizeof(Request));
-    r->request_type = request_type;
+    r->action_type = action_type;
     r->mob = mob;
     r->buffer = buffer;
     return r;
