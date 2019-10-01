@@ -1,1 +1,1 @@
-enum EventStatus { Live, Terminated };
+enum EventStatus { LiveEventStatus, TerminatedEventStatus };

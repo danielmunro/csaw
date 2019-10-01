@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <uuid/uuid.h>
+enum ActionType;
+typedef struct GameService GameServiceT;
 #include "uuid.c"
 #include "mob/mob.h"
 #include "db/db.h"

@@ -1,4 +1,4 @@
-void do_say_action(Request *request) {
+void do_say_action(GameServiceT *game_service, Request *request) {
 
 }
 
