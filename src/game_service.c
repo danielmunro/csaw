@@ -3,6 +3,7 @@ enum GameServiceStatus { Initialized = 1, Running = 2, Stopped = 3 };
 typedef struct {
     Server *server;
     EventDispatcher *event_dispatcher;
+    ActionTable *action_table;
     enum GameServiceStatus status;
 } GameService;
 
@@ -10,6 +11,7 @@ GameService *create_game_service() {
     GameService *g = malloc(sizeof(GameService));
     g->server = create_server();
     g->event_dispatcher = create_event_dispatcher();
+    g->action_table = create_action_table();
     g->status = Initialized;
     return g;
 }
