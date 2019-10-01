@@ -16,7 +16,7 @@ void test_create_client_adds_client_to_server() {
     Server *s = create_server();
 
     // when
-    Client *c = create_client(s, TEST_SOCKET);
+    ClientT *c = create_client(s, TEST_SOCKET);
 
     // then
     assert(c != 0);
@@ -27,7 +27,7 @@ void test_new_connection_creates_client() {
     Server *s = create_server();
 
     // when
-    Client *c = new_connection(s);
+    ClientT *c = new_connection(s);
 
     // then
     assert(c != 0);
@@ -36,7 +36,7 @@ void test_new_connection_creates_client() {
 void test_end_client_session_removes_client_from_server() {
     // setup
     Server *s = create_server();
-    Client *c = new_connection(s);
+    ClientT *c = new_connection(s);
 
     // when
     end_client_session(s, c);
@@ -50,7 +50,7 @@ void test_end_client_session_removes_client_from_server() {
 void test_read_socket_adds_to_client_buffer() {
     // setup
     Server *s = create_server();
-    Client *c = new_connection(s);
+    ClientT *c = new_connection(s);
 
     // when
     read_client_socket(s, c);

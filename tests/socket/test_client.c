@@ -1,7 +1,7 @@
 void test_send_to_client_writes_data() {
     // setup
     Server *s = create_server();
-    Client *c = new_connection(s);
+    ClientT *c = new_connection(s);
 
     // given
     char * message = "hello world";

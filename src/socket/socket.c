@@ -7,7 +7,7 @@ char * welcome_message = "hello there";
 typedef struct {
     fd_set reading_fds;
     int main_socket;
-    Client *clients[MAX_CLIENTS];
+    ClientT *clients[MAX_CLIENTS];
     struct sockaddr_in address;
 } Server;
 
@@ -16,11 +16,11 @@ Server *create_server() {
 }
 
 typedef struct {
-    Client *client;
+    ClientT *client;
     char * buffer;
 } ClientBuffer;
 
-ClientBuffer *create_client_buffer(Client *client, char * buffer) {
+ClientBuffer *create_client_buffer(ClientT *client, char * buffer) {
     ClientBuffer *c = malloc(sizeof(ClientBuffer));
     c->client = client;
     c->buffer = buffer;
@@ -67,7 +67,7 @@ void open_main_socket(Server *s) {
     puts("waiting for connections...");
 }
 
-Client *create_client(Server *s, int new_socket) {
+ClientT *create_client(Server *s, int new_socket) {
     struct sockaddr_in address;
     getpeername(new_socket, (struct sockaddr*)&address, (socklen_t*)sizeof(address));
     for (int i = 0; i < MAX_CLIENTS; i++) {
@@ -80,7 +80,7 @@ Client *create_client(Server *s, int new_socket) {
     return 0;
 }
 
-Client *new_connection(Server *s) {
+ClientT *new_connection(Server *s) {
     int addrlen = sizeof(s->address);
     int new_socket = accept(s->main_socket, (struct sockaddr *)&s->address, (socklen_t*)&addrlen);
     if (new_socket < 0) {
@@ -89,12 +89,12 @@ Client *new_connection(Server *s) {
     }
     printf("New connection, socket fd is %d, ip is : %s, port : %d\n",
            new_socket, inet_ntoa(s->address.sin_addr), ntohs(s->address.sin_port));
-    Client *c = create_client(s, new_socket);
+    ClientT *c = create_client(s, new_socket);
     send_to_client(c, welcome_message);
     return c;
 }
 
-void end_client_session(Server *s, Client *c) {
+void end_client_session(Server *s, ClientT *c) {
     struct sockaddr_in address;
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (s->clients[i] == c) {
@@ -109,7 +109,7 @@ void end_client_session(Server *s, Client *c) {
     close(c->socket);
 }
 
-void read_client_socket(Server *s, Client *client) {
+void read_client_socket(Server *s, ClientT *client) {
     char buffer[MAX_READ_BUFFER + 1];
     int value = read(client->socket, buffer, MAX_READ_BUFFER);
     if (value == 0) {

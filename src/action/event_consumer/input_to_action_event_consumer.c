@@ -4,7 +4,7 @@ void consume_input_to_action_event(GameServiceT *game_service, Event *event) {
             Event *action_event = create_action_event(game_service->action_table->actions[i]);
             dispatch_event(game_service, action_event);
             if (action_event->status == LiveEventStatus) {
-                // do action ?
+
             }
         }
     }

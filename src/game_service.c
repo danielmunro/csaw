@@ -1,19 +1,23 @@
 enum GameServiceStatus { Initialized = 1, Running = 2, Stopped = 3 };
 
-typedef struct GameService {
+struct GameService {
     Server *server;
     EventDispatcher *event_dispatcher;
     ActionTable *action_table;
     enum GameServiceStatus status;
-} GameService;
+};
 
-GameService *create_game_service() {
-    GameService *g = malloc(sizeof(GameService));
+GameServiceT *create_game_service() {
+    GameServiceT *g = malloc(sizeof(struct GameService));
     g->server = create_server();
     g->event_dispatcher = create_event_dispatcher();
     g->action_table = create_action_table();
     g->status = Initialized;
     return g;
+}
+
+ClientT *get_client(GameServiceT *game_service, int i) {
+    return game_service->server->clients[i];
 }
 
 void dispatch_event(GameServiceT *game_service, Event *event) {
@@ -27,7 +31,7 @@ void dispatch_event(GameServiceT *game_service, Event *event) {
     }
 }
 
-void check_client_buffers(GameService *g) {
+void check_client_buffers(GameServiceT *g) {
     ClientReadBuffers *clientReadBuffers = read_client_buffers(g->server);
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (clientReadBuffers->buffers[i]) {
@@ -37,7 +41,7 @@ void check_client_buffers(GameService *g) {
     }
 }
 
-void start_game_service(GameService *g) {
+void start_game_service(GameServiceT *g) {
     g->status = Running;
     while(g->status == Running) {
         loop_server(g->server);
