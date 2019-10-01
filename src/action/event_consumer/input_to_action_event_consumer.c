@@ -10,6 +10,7 @@ void consume_input_to_action_event(GameServiceT *game_service, Event *event) {
                         event->mob,
                         event->buffer));
             }
+            return;
         }
     }
 }
