@@ -4,6 +4,7 @@ struct GameService {
     Server *server;
     EventDispatcher *event_dispatcher;
     ActionTable *action_table;
+    MobTable *mob_table;
     enum GameServiceStatus status;
 };
 
@@ -12,6 +13,7 @@ GameServiceT *create_game_service() {
     g->server = create_server();
     g->event_dispatcher = create_event_dispatcher();
     g->action_table = create_action_table();
+    g->mob_table = create_mob_table();
     g->status = Initialized;
     return g;
 }

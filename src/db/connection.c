@@ -1,14 +1,16 @@
-void do_exit(PGconn *conn) {
+PGconn *conn;
+
+void close_db_conneciton() {
     PQfinish(conn);
-    exit(1);
 }
 
 PGconn *create_db_connection() {
-    PGconn *conn = PQconnectdb("host=localhost user=postgres dbname=nodesrv password=nodesrv");
+    conn = PQconnectdb("host=localhost user=postgres dbname=nodesrv password=nodesrv");
     if (PQstatus(conn) == CONNECTION_BAD) {
         fprintf(stderr, "Connection to database failed: %s\n",
                 PQerrorMessage(conn));
-        do_exit(conn);
+        close_db_conneciton();
+        exit(1);
     }
     return conn;
 }
