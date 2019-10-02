@@ -20,9 +20,13 @@ ClientT *get_client(GameServiceT *game_service, int i) {
     return game_service->server->clients[i];
 }
 
+int input_matches_action(ActionT *action, char *name_partial) {
+    return action && strncmp(action->name, name_partial, strlen(name_partial)) == 0;
+}
+
 ActionT *get_action(GameServiceT *game_service, char *name_partial) {
     for (int i = 0; i < MAX_ACTIONS; i++) {
-        if (game_service->action_table->actions[i] && strstr(game_service->action_table->actions[i]->name, name_partial) == 0) {
+        if (input_matches_action(game_service->action_table->actions[i], name_partial)) {
             return game_service->action_table->actions[i];
         }
     }

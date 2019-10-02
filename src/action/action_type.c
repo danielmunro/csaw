@@ -1,1 +1,1 @@
-enum ActionType { Say, North, South, East, West, Up, Down, Any, None };
+enum ActionType { North, South, East, West, Up, Down, Say,  Any, None };
