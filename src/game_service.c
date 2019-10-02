@@ -57,3 +57,11 @@ void start_game_service(GameServiceT *g) {
         check_client_buffers(g);
     }
 }
+
+void client_send_to_clients(GameServiceT *g, ClientT *c, char *buffer) {
+    for (int i = 0; i < MAX_CLIENTS; i++) {
+        if (g->server->clients[i] && g->server->clients[i] != c) {
+            send_to_client(g->server->clients[i], buffer);
+        }
+    }
+}

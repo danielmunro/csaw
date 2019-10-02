@@ -5,6 +5,7 @@ enum ActionType;
 typedef struct GameService GameServiceT;
 typedef struct Client ClientT;
 typedef struct Action ActionT;
+void client_send_to_clients(GameServiceT *game_service, ClientT *client, char *buffer);
 ClientT *get_client(GameServiceT *game_service, int i);
 ActionT *get_action(GameServiceT *game_service, char *name_partial);
 #include "uuid.c"
