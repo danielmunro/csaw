@@ -36,9 +36,9 @@ char * get_next_buffer(ClientT *c) {
     return c->buffer[i];
 }
 
-int send_to_client(ClientT *c, char * message) {
-    int bytes_sent = send(c->socket, message, strlen(message), 0);
-    if (bytes_sent != strlen(message)) {
+int send_to_client(ClientT *c, char *buffer) {
+    int bytes_sent = send(c->socket, buffer, strlen(buffer), 0);
+    if (bytes_sent != strlen(buffer)) {
         perror("send");
     }
     return bytes_sent;
