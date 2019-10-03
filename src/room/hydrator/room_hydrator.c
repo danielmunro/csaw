@@ -2,7 +2,8 @@ Room *hydrate_room(PGresult *result, int row) {
     char * pEnd;
     return create_room(
             strtol(PQgetvalue(result, row, 0), &pEnd, 10),
-            PQgetvalue(result, row, 1));
+            uuid_from_string(PQgetvalue(result, row, 1)),
+            PQgetvalue(result, row, 2));
 }
 
 RoomTable *hydrate_room_table(PGresult *result) {

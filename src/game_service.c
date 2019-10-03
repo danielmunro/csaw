@@ -60,6 +60,7 @@ void check_client_buffers(GameServiceT *g) {
 
 void start_game_service(GameServiceT *g) {
     g->status = Running;
+    puts("starting game loop");
     while(g->status == Running) {
         loop_server(g->server);
         check_client_buffers(g);
