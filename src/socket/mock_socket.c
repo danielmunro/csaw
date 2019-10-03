@@ -1,6 +1,5 @@
 #ifdef MOCK
 #define accept mock_accept
-#define send mock_send
 #define read mock_read
 #endif
 #define MAX_CLIENTS 100
