@@ -52,7 +52,7 @@ void test_client_can_send_a_message_to_other_clients() {
 
     client_send_to_clients(game_service, client1, buffer);
 
-    MessageCollection *message_collection = get_mock_message_collection();
+//    MessageCollection *message_collection = get_mock_message_collection();
 //    printf("hey %s\n", message_collection->messages[0]->buffer);
 //    assert(message_collection->messages[0] != 0);
 //    assert(message_collection->messages[0]->client == client2);

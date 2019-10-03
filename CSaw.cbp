@@ -17,6 +17,16 @@
 					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/danmunro/github/csaw"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="test">
 				<Option working_dir="/Users/danmunro/github/csaw"/>
 				<Option type="4"/>
@@ -27,8 +37,8 @@
 					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="test_csaw">
-				<Option output="/Users/danmunro/github/csaw/test_csaw" prefix_auto="0" extension_auto="0"/>
+			<Target title="test_game_service">
+				<Option output="/Users/danmunro/github/csaw/test_game_service" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/danmunro/github/csaw"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -37,14 +47,14 @@
 					<Add directory="/usr/local/opt/libpq/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 test_csaw"/>
+					<Build command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 test_game_service"/>
 					<CompileFile command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="test_csaw/fast">
-				<Option output="/Users/danmunro/github/csaw/test_csaw" prefix_auto="0" extension_auto="0"/>
+			<Target title="test_game_service/fast">
+				<Option output="/Users/danmunro/github/csaw/test_game_service" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/danmunro/github/csaw"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -53,17 +63,39 @@
 					<Add directory="/usr/local/opt/libpq/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 test_csaw/fast"/>
+					<Build command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 test_game_service/fast"/>
 					<CompileFile command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="rebuild_cache">
+			<Target title="test_socket">
+				<Option output="/Users/danmunro/github/csaw/test_socket" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/Users/danmunro/github/csaw"/>
-				<Option type="4"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/usr/local/opt/libpq/include"/>
+				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<Build command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 test_socket"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_socket/fast">
+				<Option output="/Users/danmunro/github/csaw/test_socket" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/danmunro/github/csaw"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/usr/local/opt/libpq/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 test_socket/fast"/>
 					<CompileFile command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
@@ -118,8 +150,11 @@
 		<Unit filename="/Users/danmunro/github/csaw/src/main.c">
 			<Option target="csaw"/>
 		</Unit>
-		<Unit filename="/Users/danmunro/github/csaw/tests/test_main.c">
-			<Option target="test_csaw"/>
+		<Unit filename="/Users/danmunro/github/csaw/tests/test_game_service_main.c">
+			<Option target="test_game_service"/>
+		</Unit>
+		<Unit filename="/Users/danmunro/github/csaw/tests/test_socket_main.c">
+			<Option target="test_socket"/>
 		</Unit>
 		<Unit filename="/Users/danmunro/github/csaw/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

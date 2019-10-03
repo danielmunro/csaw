@@ -4,5 +4,3 @@
 #include "socket/test_client.c"
 #include "event/test_event_dispatcher.c"
 #include "game/test_game_service.c"
-#include "../src/socket/mock_client.c"
-#include "../src/socket/mock_socket.c"

@@ -4,4 +4,6 @@
 #include <errno.h>
 #include <arpa/inet.h>
 #include "client.c"
+#include "mock_client.c"
 #include "socket.c"
+#include "mock_socket.c"

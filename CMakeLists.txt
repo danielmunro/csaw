@@ -7,9 +7,11 @@ find_package(PostgreSQL REQUIRED)
 target_link_libraries(csaw PRIVATE ${PostgreSQL_LIBRARIES})
 
 enable_testing()
-add_executable(test_csaw tests/test_main.c)
-add_test(test_socket test_csaw)
-add_test(test_client test_csaw)
-add_test(test_event_dispatcher test_csaw)
-add_test(test_game_service test_csaw)
-target_link_libraries(test_csaw PRIVATE ${PostgreSQL_LIBRARIES})
+
+add_executable(test_socket tests/test_socket_main.c)
+add_test(test_socket test_socket)
+target_link_libraries(test_socket PRIVATE ${PostgreSQL_LIBRARIES})
+
+add_executable(test_game_service tests/test_game_service_main.c)
+add_test(test_game_service test_game_service)
+target_link_libraries(test_game_service PRIVATE ${PostgreSQL_LIBRARIES})
