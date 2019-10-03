@@ -21,4 +21,5 @@ int main() {
     test_get_action_sanity_2();
     test_get_action_sanity_3();
     test_get_action_sanity_4();
+    test_client_can_send_a_message_to_other_clients();
 }

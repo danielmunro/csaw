@@ -24,6 +24,9 @@ ActionT *get_action(GameServiceT *game_service, char *name_partial);
 typedef struct Mob MobT;
 MobT *create_mob(int id, UuidT *uuid, char *name);
 
+/**
+ * Mob Table
+ */
 typedef struct MobTable MobTableT;
 MobTableT *hydrate_mob_table(PGresult *result);
 
@@ -33,11 +36,14 @@ MobTableT *hydrate_mob_table(PGresult *result);
 typedef struct Room RoomT;
 typedef struct Exit ExitT;
 
+/**
+ * Room Table
+ */
 typedef struct RoomTable RoomTableT;
 RoomTableT *hydrate_room_table(PGresult *result);
 
 #include "uuid.c"
-#include "repository.h"
+#include "queries.h"
 #include "db/db.h"
 #include "mob/mob.h"
 #include "room/room.h"
@@ -46,5 +52,5 @@ RoomTableT *hydrate_room_table(PGresult *result);
 #include "socket/socket.h"
 #include "action/action.h"
 #include "event/event.h"
-#include "game_service.c"
-#include "event_consumer.h"
+#include "game/game_service.h"
+#include "event_consumers.h"
