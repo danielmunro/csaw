@@ -8,10 +8,12 @@ target_link_libraries(csaw PRIVATE ${PostgreSQL_LIBRARIES})
 
 enable_testing()
 
-add_executable(test_socket tests/test_socket_main.c)
-add_test(test_socket test_socket)
-target_link_libraries(test_socket PRIVATE ${PostgreSQL_LIBRARIES})
+function(add_test_suite test_name test_main)
+    add_executable(${test_name} ${test_main})
+    add_test(${test_name} ${test_name})
+    target_link_libraries(${test_name} PRIVATE ${PostgreSQL_LIBRARIES})
+endfunction()
 
-add_executable(test_game_service tests/test_game_service_main.c)
-add_test(test_game_service test_game_service)
-target_link_libraries(test_game_service PRIVATE ${PostgreSQL_LIBRARIES})
+add_test_suite(test_socket tests/test_socket_main.c)
+add_test_suite(test_client tests/test_client_main.c)
+add_test_suite(test_game_service tests/test_game_service_main.c)

@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.15.3/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.15.3/bin/cmake -E remove -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /Users/danmunro/github/csaw
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/Cellar/cmake/3.15.3/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target test
 test:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/local/Cellar/cmake/3.15.3/bin/ctest --force-new-ctest-process $(ARGS)
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/ctest --force-new-ctest-process $(ARGS)
 .PHONY : test
 
 # Special rule for the target test
@@ -80,8 +80,8 @@ test/fast: test
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/local/Cellar/cmake/3.15.3/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -122,6 +122,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named test_socket
+
+# Build rule for target.
+test_socket: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_socket
+.PHONY : test_socket
+
+# fast build rule for target.
+test_socket/fast:
+	$(MAKE) -f CMakeFiles/test_socket.dir/build.make CMakeFiles/test_socket.dir/build
+.PHONY : test_socket/fast
+
+#=============================================================================
 # Target rules for targets named test_game_service
 
 # Build rule for target.
@@ -135,17 +148,17 @@ test_game_service/fast:
 .PHONY : test_game_service/fast
 
 #=============================================================================
-# Target rules for targets named test_socket
+# Target rules for targets named test_client
 
 # Build rule for target.
-test_socket: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_socket
-.PHONY : test_socket
+test_client: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_client
+.PHONY : test_client
 
 # fast build rule for target.
-test_socket/fast:
-	$(MAKE) -f CMakeFiles/test_socket.dir/build.make CMakeFiles/test_socket.dir/build
-.PHONY : test_socket/fast
+test_client/fast:
+	$(MAKE) -f CMakeFiles/test_client.dir/build.make CMakeFiles/test_client.dir/build
+.PHONY : test_client/fast
 
 #=============================================================================
 # Target rules for targets named csaw
@@ -186,6 +199,33 @@ src/main.s: src/main.c.s
 src/main.c.s:
 	$(MAKE) -f CMakeFiles/csaw.dir/build.make CMakeFiles/csaw.dir/src/main.c.s
 .PHONY : src/main.c.s
+
+tests/test_client_main.o: tests/test_client_main.c.o
+
+.PHONY : tests/test_client_main.o
+
+# target to build an object file
+tests/test_client_main.c.o:
+	$(MAKE) -f CMakeFiles/test_client.dir/build.make CMakeFiles/test_client.dir/tests/test_client_main.c.o
+.PHONY : tests/test_client_main.c.o
+
+tests/test_client_main.i: tests/test_client_main.c.i
+
+.PHONY : tests/test_client_main.i
+
+# target to preprocess a source file
+tests/test_client_main.c.i:
+	$(MAKE) -f CMakeFiles/test_client.dir/build.make CMakeFiles/test_client.dir/tests/test_client_main.c.i
+.PHONY : tests/test_client_main.c.i
+
+tests/test_client_main.s: tests/test_client_main.c.s
+
+.PHONY : tests/test_client_main.s
+
+# target to generate assembly for a file
+tests/test_client_main.c.s:
+	$(MAKE) -f CMakeFiles/test_client.dir/build.make CMakeFiles/test_client.dir/tests/test_client_main.c.s
+.PHONY : tests/test_client_main.c.s
 
 tests/test_game_service_main.o: tests/test_game_service_main.c.o
 
@@ -248,14 +288,18 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+	@echo "... test_socket"
 	@echo "... test"
 	@echo "... test_game_service"
-	@echo "... test_socket"
 	@echo "... edit_cache"
+	@echo "... test_client"
 	@echo "... csaw"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... tests/test_client_main.o"
+	@echo "... tests/test_client_main.i"
+	@echo "... tests/test_client_main.s"
 	@echo "... tests/test_game_service_main.o"
 	@echo "... tests/test_game_service_main.i"
 	@echo "... tests/test_game_service_main.s"
