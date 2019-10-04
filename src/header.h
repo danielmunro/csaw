@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <uuid/uuid.h>
 #include <libpq-fe.h>
+#include <string.h>
 #define MAX_ROOMS 12000
 #define MAX_MOBS_PER_ROOM 50
 
@@ -38,6 +39,8 @@ MobTableT *hydrate_mob_table(PGresult *result);
  * Rooms
  */
 typedef struct Room RoomT;
+int get_room_id(RoomT *room);
+
 typedef struct Exit ExitT;
 
 /**

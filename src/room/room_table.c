@@ -8,3 +8,12 @@ RoomTable *create_room_table() {
     PQclear(res);
     return room_table;
 }
+
+Room *get_room(RoomTable *room_table, int id) {
+    for (int i = 0; i < MAX_ROOMS; i++) {
+        if (room_table->rooms[i] && room_table->rooms[i]->id == id) {
+            return room_table->rooms[i];
+        }
+    }
+    return 0;
+}

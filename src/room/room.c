@@ -15,6 +15,6 @@ Room *create_room(int id, UuidT *uuid, char *name) {
     return room;
 }
 
-void set_exits(Room *room, Exit *exits[]) {
-    memcpy(room->exits, exits, sizeof *exits);
+int get_room_id(Room *room) {
+    return room->id;
 }

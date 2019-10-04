@@ -1,23 +1,13 @@
 PGresult *fetch_all_mobs() {
-    PGresult *res = PQexec(conn, query_all_mobs);
-
-    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-        printf("No data retrieved\n");
-        PQclear(res);
-        close_db_conneciton();
-    }
-
-    return res;
+    return PQexec(conn, query_all_mobs);
 }
 
 PGresult *fetch_all_rooms() {
-    PGresult *res = PQexec(conn, query_all_rooms);
+    return PQexec(conn, query_all_rooms);
+}
 
-    if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-        printf("No data retrieved\n");
-        PQclear(res);
-        close_db_conneciton();
-    }
-
-    return res;
+PGresult *fetch_exits_for_room(RoomT *room) {
+    char *param = "";
+    sprintf(param, "%d", get_room_id(room));
+    return PQexec(conn, strcat(query_room_exits, param));
 }
