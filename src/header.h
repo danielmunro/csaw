@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <uuid/uuid.h>
 #include <libpq-fe.h>
+#define MAX_ROOMS 12000
+#define MAX_MOBS_PER_ROOM 50
 
 enum ActionType;
 enum EventType;
@@ -23,6 +25,8 @@ ActionT *get_action(GameServiceT *game_service, char *name_partial);
  */
 typedef struct Mob MobT;
 MobT *create_mob(int id, UuidT *uuid, char *name);
+
+typedef struct MobLocation MobLocationT;
 
 /**
  * Mob Table

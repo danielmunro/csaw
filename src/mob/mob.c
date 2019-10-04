@@ -13,4 +13,3 @@ Mob *create_mob(int id, UuidT *uuid, char *name) {
   strcpy(m->name, name);
   return m;
 }
-

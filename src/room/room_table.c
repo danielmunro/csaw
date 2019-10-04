@@ -1,5 +1,3 @@
-#define MAX_ROOMS 12000
-
 typedef struct RoomTable {
     RoomT *rooms[MAX_ROOMS];
 } RoomTable;

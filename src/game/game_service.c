@@ -6,6 +6,7 @@ struct GameService {
     ActionTable *action_table;
     MobTable *mob_table;
     RoomTable *room_table;
+    LocationTable *location_table;
     enum GameServiceStatus status;
 };
 
@@ -16,8 +17,17 @@ GameServiceT *create_game_service() {
     g->action_table = create_action_table();
     g->mob_table = create_mob_table();
     g->room_table = create_room_table();
+    g->location_table = create_location_table();
     g->status = Initialized;
     return g;
+}
+
+void add_mob_location(GameServiceT *game_service, Mob *mob, Room *room) {
+    for (int i = 0; i < MAX_MOBS_PER_ROOM; i++) {
+        if (!game_service->location_table->rooms[room->id][i]) {
+            game_service->location_table->rooms[room->id][i] = mob;
+        }
+    }
 }
 
 ClientT *get_client(GameServiceT *game_service, int i) {

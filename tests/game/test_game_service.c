@@ -48,16 +48,19 @@ void test_client_can_send_a_message_to_other_clients() {
     ClientT *client1 = create_client(game_service->server, 0);
     ClientT *client2 = create_client(game_service->server, 1);
     ClientT *client3 = create_client(game_service->server, 2);
+
+    // given
     char *buffer = "hello world";
 
+    // when
     client_send_to_clients(game_service, client1, buffer);
 
-//    MessageCollection *message_collection = get_mock_message_collection();
-//    printf("hey %s\n", message_collection->messages[0]->buffer);
-//    assert(message_collection->messages[0] != 0);
-//    assert(message_collection->messages[0]->client == client2);
-//    assert(message_collection->messages[0]->client == client2);
-//    assert(message_collection->messages[0]->buffer == buffer);
-//    assert(message_collection->messages[1]->client == client3);
-//    assert(message_collection->messages[1]->buffer == buffer);
+    // then
+    MessageCollection *message_collection = get_mock_message_collection();
+    assert(message_collection->messages[0] != 0);
+    assert(message_collection->messages[0]->client == client2);
+    assert(message_collection->messages[0]->client == client2);
+    assert(message_collection->messages[0]->buffer == buffer);
+    assert(message_collection->messages[1]->client == client3);
+    assert(message_collection->messages[1]->buffer == buffer);
 }
