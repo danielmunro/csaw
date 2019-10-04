@@ -4,6 +4,7 @@ typedef struct Mob {
     int id;
     Uuid uuid;
     char name[20];
+    RoomT *room;
 } Mob;
 
 Mob *create_mob(int id, UuidT *uuid, char *name) {

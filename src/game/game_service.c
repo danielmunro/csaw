@@ -26,6 +26,8 @@ void add_mob_location(GameServiceT *game_service, Mob *mob, Room *room) {
     for (int i = 0; i < MAX_MOBS_PER_ROOM; i++) {
         if (!game_service->location_table->rooms[room->id][i]) {
             game_service->location_table->rooms[room->id][i] = mob;
+            mob->room = room;
+            return;
         }
     }
 }
