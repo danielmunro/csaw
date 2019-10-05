@@ -2,6 +2,7 @@
 #include "header.h"
 
 int main() {
-    puts("MAIN");
     test_client_can_look();
+
+    test_room_to_string();
 }

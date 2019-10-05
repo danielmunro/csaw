@@ -19,9 +19,9 @@ int get_room_id(Room *room) {
     return room->id;
 }
 
-void room_to_string(Room *room, char *out) {
-    strcat(out, "hello world");
-    return;
+char *room_to_string(Room *room) {
+    char *out;
+    out = (char *) malloc(100);
     strcat(out, room->name);
     strcat(out, "\nExits [");
     for (int j = 0; j < MAX_EXITS - 1; j++) {
@@ -30,4 +30,5 @@ void room_to_string(Room *room, char *out) {
         }
     }
     strcat(out, "]");
+    return out;
 }
