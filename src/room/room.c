@@ -18,3 +18,14 @@ Room *create_room(int id, UuidT *uuid, char *name) {
 int get_room_id(Room *room) {
     return room->id;
 }
+
+void room_to_string(Room *room, char *out) {
+    strcat(out, room->name);
+    strcat(out, "\nExits [");
+    for (int j = 0; j < MAX_EXITS - 1; j++) {
+        if (room->exits[j]) {
+            strncat(out, room->exits[j]->direction, 1);
+        }
+    }
+    strcat(out, "]");
+}
