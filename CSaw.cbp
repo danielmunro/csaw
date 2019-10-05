@@ -27,9 +27,41 @@
 					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="test_room">
+				<Option output="/Users/danmunro/github/csaw/build/test_room" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./build"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/usr/local/opt/libpq/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 test_room"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_room/fast">
+				<Option output="/Users/danmunro/github/csaw/build/test_room" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./build"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/usr/local/opt/libpq/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 test_room/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="test_actions">
-				<Option output="/Users/danmunro/github/csaw/test_actions" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/danmunro/github/csaw"/>
+				<Option output="/Users/danmunro/github/csaw/build/test_actions" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./build"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="clang"/>
@@ -44,8 +76,8 @@
 				</MakeCommands>
 			</Target>
 			<Target title="test_actions/fast">
-				<Option output="/Users/danmunro/github/csaw/test_actions" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/danmunro/github/csaw"/>
+				<Option output="/Users/danmunro/github/csaw/build/test_actions" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./build"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="clang"/>
@@ -70,8 +102,8 @@
 				</MakeCommands>
 			</Target>
 			<Target title="test_socket">
-				<Option output="/Users/danmunro/github/csaw/test_socket" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/danmunro/github/csaw"/>
+				<Option output="/Users/danmunro/github/csaw/build/test_socket" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./build"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="clang"/>
@@ -86,8 +118,8 @@
 				</MakeCommands>
 			</Target>
 			<Target title="test_socket/fast">
-				<Option output="/Users/danmunro/github/csaw/test_socket" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/danmunro/github/csaw"/>
+				<Option output="/Users/danmunro/github/csaw/build/test_socket" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./build"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="clang"/>
@@ -102,8 +134,8 @@
 				</MakeCommands>
 			</Target>
 			<Target title="test_game_service">
-				<Option output="/Users/danmunro/github/csaw/test_game_service" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/danmunro/github/csaw"/>
+				<Option output="/Users/danmunro/github/csaw/build/test_game_service" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./build"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="clang"/>
@@ -118,8 +150,8 @@
 				</MakeCommands>
 			</Target>
 			<Target title="test_game_service/fast">
-				<Option output="/Users/danmunro/github/csaw/test_game_service" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/danmunro/github/csaw"/>
+				<Option output="/Users/danmunro/github/csaw/build/test_game_service" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./build"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="clang"/>
@@ -144,8 +176,8 @@
 				</MakeCommands>
 			</Target>
 			<Target title="test_client">
-				<Option output="/Users/danmunro/github/csaw/test_client" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/danmunro/github/csaw"/>
+				<Option output="/Users/danmunro/github/csaw/build/test_client" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./build"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="clang"/>
@@ -160,8 +192,8 @@
 				</MakeCommands>
 			</Target>
 			<Target title="test_client/fast">
-				<Option output="/Users/danmunro/github/csaw/test_client" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/danmunro/github/csaw"/>
+				<Option output="/Users/danmunro/github/csaw/build/test_client" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./build"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="clang"/>
@@ -176,8 +208,8 @@
 				</MakeCommands>
 			</Target>
 			<Target title="csaw">
-				<Option output="/Users/danmunro/github/csaw/csaw" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/danmunro/github/csaw"/>
+				<Option output="/Users/danmunro/github/csaw/build/csaw" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./build"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="clang"/>
@@ -192,8 +224,8 @@
 				</MakeCommands>
 			</Target>
 			<Target title="csaw/fast">
-				<Option output="/Users/danmunro/github/csaw/csaw" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/danmunro/github/csaw"/>
+				<Option output="/Users/danmunro/github/csaw/build/csaw" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="./build"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="clang"/>
@@ -208,9 +240,6 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/danmunro/github/csaw/src/event/event.h">
-			<Option target="csaw"/>
-		</Unit>
 		<Unit filename="/Users/danmunro/github/csaw/src/main.c">
 			<Option target="csaw"/>
 		</Unit>
@@ -222,6 +251,9 @@
 		</Unit>
 		<Unit filename="/Users/danmunro/github/csaw/tests/test_game_service_main.c">
 			<Option target="test_game_service"/>
+		</Unit>
+		<Unit filename="/Users/danmunro/github/csaw/tests/test_room_main.c">
+			<Option target="test_room"/>
 		</Unit>
 		<Unit filename="/Users/danmunro/github/csaw/tests/test_socket_main.c">
 			<Option target="test_socket"/>

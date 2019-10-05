@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.15.3/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.15.3/bin/cmake -E remove -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /Users/danmunro/github/csaw
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/Cellar/cmake/3.15.3/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target test
 test:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/local/Cellar/cmake/3.15.3/bin/ctest --force-new-ctest-process $(ARGS)
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/ctest --force-new-ctest-process $(ARGS)
 .PHONY : test
 
 # Special rule for the target test
@@ -80,8 +80,8 @@ test/fast: test
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/local/Cellar/cmake/3.15.3/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -120,6 +120,19 @@ preinstall/fast:
 depend:
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+#=============================================================================
+# Target rules for targets named test_room
+
+# Build rule for target.
+test_room: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_room
+.PHONY : test_room
+
+# fast build rule for target.
+test_room/fast:
+	$(MAKE) -f CMakeFiles/test_room.dir/build.make CMakeFiles/test_room.dir/build
+.PHONY : test_room/fast
 
 #=============================================================================
 # Target rules for targets named test_actions
@@ -294,6 +307,33 @@ tests/test_game_service_main.c.s:
 	$(MAKE) -f CMakeFiles/test_game_service.dir/build.make CMakeFiles/test_game_service.dir/tests/test_game_service_main.c.s
 .PHONY : tests/test_game_service_main.c.s
 
+tests/test_room_main.o: tests/test_room_main.c.o
+
+.PHONY : tests/test_room_main.o
+
+# target to build an object file
+tests/test_room_main.c.o:
+	$(MAKE) -f CMakeFiles/test_room.dir/build.make CMakeFiles/test_room.dir/tests/test_room_main.c.o
+.PHONY : tests/test_room_main.c.o
+
+tests/test_room_main.i: tests/test_room_main.c.i
+
+.PHONY : tests/test_room_main.i
+
+# target to preprocess a source file
+tests/test_room_main.c.i:
+	$(MAKE) -f CMakeFiles/test_room.dir/build.make CMakeFiles/test_room.dir/tests/test_room_main.c.i
+.PHONY : tests/test_room_main.c.i
+
+tests/test_room_main.s: tests/test_room_main.c.s
+
+.PHONY : tests/test_room_main.s
+
+# target to generate assembly for a file
+tests/test_room_main.c.s:
+	$(MAKE) -f CMakeFiles/test_room.dir/build.make CMakeFiles/test_room.dir/tests/test_room_main.c.s
+.PHONY : tests/test_room_main.c.s
+
 tests/test_socket_main.o: tests/test_socket_main.c.o
 
 .PHONY : tests/test_socket_main.o
@@ -328,6 +368,7 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+	@echo "... test_room"
 	@echo "... test_actions"
 	@echo "... test"
 	@echo "... test_socket"
@@ -347,6 +388,9 @@ help:
 	@echo "... tests/test_game_service_main.o"
 	@echo "... tests/test_game_service_main.i"
 	@echo "... tests/test_game_service_main.s"
+	@echo "... tests/test_room_main.o"
+	@echo "... tests/test_room_main.i"
+	@echo "... tests/test_room_main.s"
 	@echo "... tests/test_socket_main.o"
 	@echo "... tests/test_socket_main.i"
 	@echo "... tests/test_socket_main.s"

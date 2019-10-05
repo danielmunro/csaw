@@ -1,6 +1,7 @@
 cmake_minimum_required (VERSION 2.6)
 project (CSaw)
-add_executable(csaw src/main.c src/event/event.h)
+add_executable(src/main.c)
+set(EXECUTABLE_OUTPUT_PATH ./build CACHE PATH "Build directory" FORCE)
 
 include_directories(/usr/local/opt/libpq/include)
 find_package(PostgreSQL REQUIRED)
@@ -18,3 +19,4 @@ add_test_suite(test_socket tests/test_socket_main.c)
 add_test_suite(test_client tests/test_client_main.c)
 add_test_suite(test_game_service tests/test_game_service_main.c)
 add_test_suite(test_actions tests/test_actions_main.c)
+add_test_suite(test_room tests/test_room_main.c)

@@ -55,5 +55,4 @@ CMakeFiles/
 .idea/
 Testing/
 CMakeCache.txt
-csaw
-test_csaw
+build/

@@ -6,3 +6,4 @@
 #include "event/test_event_dispatcher.c"
 #include "game/test_game_service.c"
 #include "action/test_actions.c"
+#include "room/test_room.c"
