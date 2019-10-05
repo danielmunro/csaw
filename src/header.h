@@ -25,7 +25,7 @@ ActionT *get_action(GameServiceT *game_service, char *name_partial);
  * Mobs
  */
 typedef struct Mob MobT;
-MobT *create_mob(int id, UuidT *uuid, char *name);
+MobT *create_mob(int id, uuid_t uuid, char *name);
 
 typedef struct MobLocation MobLocationT;
 
