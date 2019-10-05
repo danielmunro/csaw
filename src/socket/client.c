@@ -6,6 +6,7 @@ struct Client {
     char * buffer[MAX_INPUT];
     int buffer_index;
     int delay;
+    Mob *mob;
 };
 
 ClientT *new_client(struct sockaddr_in address, int socket) {

@@ -122,6 +122,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named test_actions
+
+# Build rule for target.
+test_actions: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_actions
+.PHONY : test_actions
+
+# fast build rule for target.
+test_actions/fast:
+	$(MAKE) -f CMakeFiles/test_actions.dir/build.make CMakeFiles/test_actions.dir/build
+.PHONY : test_actions/fast
+
+#=============================================================================
 # Target rules for targets named test_socket
 
 # Build rule for target.
@@ -199,6 +212,33 @@ src/main.s: src/main.c.s
 src/main.c.s:
 	$(MAKE) -f CMakeFiles/csaw.dir/build.make CMakeFiles/csaw.dir/src/main.c.s
 .PHONY : src/main.c.s
+
+tests/test_actions_main.o: tests/test_actions_main.c.o
+
+.PHONY : tests/test_actions_main.o
+
+# target to build an object file
+tests/test_actions_main.c.o:
+	$(MAKE) -f CMakeFiles/test_actions.dir/build.make CMakeFiles/test_actions.dir/tests/test_actions_main.c.o
+.PHONY : tests/test_actions_main.c.o
+
+tests/test_actions_main.i: tests/test_actions_main.c.i
+
+.PHONY : tests/test_actions_main.i
+
+# target to preprocess a source file
+tests/test_actions_main.c.i:
+	$(MAKE) -f CMakeFiles/test_actions.dir/build.make CMakeFiles/test_actions.dir/tests/test_actions_main.c.i
+.PHONY : tests/test_actions_main.c.i
+
+tests/test_actions_main.s: tests/test_actions_main.c.s
+
+.PHONY : tests/test_actions_main.s
+
+# target to generate assembly for a file
+tests/test_actions_main.c.s:
+	$(MAKE) -f CMakeFiles/test_actions.dir/build.make CMakeFiles/test_actions.dir/tests/test_actions_main.c.s
+.PHONY : tests/test_actions_main.c.s
 
 tests/test_client_main.o: tests/test_client_main.c.o
 
@@ -288,8 +328,9 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... test_socket"
+	@echo "... test_actions"
 	@echo "... test"
+	@echo "... test_socket"
 	@echo "... test_game_service"
 	@echo "... edit_cache"
 	@echo "... test_client"
@@ -297,6 +338,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... tests/test_actions_main.o"
+	@echo "... tests/test_actions_main.i"
+	@echo "... tests/test_actions_main.s"
 	@echo "... tests/test_client_main.o"
 	@echo "... tests/test_client_main.i"
 	@echo "... tests/test_client_main.s"

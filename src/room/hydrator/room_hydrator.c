@@ -1,15 +1,18 @@
-Room *hydrate_room(PGresult *result, int row) {
+int id_from_pgresult(PGresult *result, int row, int index) {
     char *pEnd;
+    return strtol(PQgetvalue(result, row, index), &pEnd, 10);
+}
+
+Room *hydrate_room(PGresult *result, int row) {
     return create_room(
-            strtol(PQgetvalue(result, row, 0), &pEnd, 10),
+            id_from_pgresult(result, row, 0),
             uuid_from_string(PQgetvalue(result, row, 1)),
             PQgetvalue(result, row, 2));
 }
 
 Exit *hydrate_exit(RoomTable *room_table, PGresult *result, int row) {
-    char *pEnd;
     return create_exit(
-            strtol(PQgetvalue(result, row, 0), &pEnd, 10),
+            id_from_pgresult(result, row, 0),
             get_room(room_table, strtol(PQgetvalue(result, row, 1), 0, 10)),
             get_room(room_table, strtol(PQgetvalue(result, row, 2), 0, 10)),
             PQgetvalue(result, row, 3));
