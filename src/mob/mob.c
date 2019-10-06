@@ -3,7 +3,7 @@
 typedef struct Mob {
     int id;
     uuid_t uuid;
-    char name[20];
+    char name[120];
     RoomT *room;
 } Mob;
 

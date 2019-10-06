@@ -3,7 +3,7 @@
 typedef struct Room {
     int id;
     UuidT uuid;
-    char *name;
+    char name[200];
     Exit *exits[MAX_EXITS];
 } Room;
 
@@ -11,7 +11,7 @@ Room *create_room(int id, UuidT *uuid, char *name) {
     Room *room = malloc(sizeof(Room));
     room->id = id;
     uuid_copy(room->uuid.uuid, uuid->uuid);
-    room->name = name;
+    strcpy(room->name, name);
     return room;
 }
 

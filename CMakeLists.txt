@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 2.6)
 project (CSaw)
-add_executable(src/main.c)
+add_executable(csaw src/main.c)
 set(EXECUTABLE_OUTPUT_PATH ./build CACHE PATH "Build directory" FORCE)
 
 include_directories(/usr/local/opt/libpq/include)
@@ -11,7 +11,7 @@ enable_testing()
 
 function(add_test_suite test_name test_main)
     add_executable(${test_name} ${test_main})
-    add_test(${test_name} ${test_name})
+    add_test(NAME ${test_name} COMMAND $<TARGET_FILE:${test_name}>)
     target_link_libraries(${test_name} PRIVATE ${PostgreSQL_LIBRARIES})
 endfunction()
 
