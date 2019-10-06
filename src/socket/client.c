@@ -25,8 +25,11 @@ int get_buffer_index(ClientT *c) {
     return c->buffer_index;
 }
 
-int add_buffer_to_client(ClientT *c, char * buffer) {
+int add_buffer_to_client(ClientT *c, char *buffer) {
     int i = get_buffer_index(c);
+    if (c->buffer[i]) {
+        free(c->buffer[i]);
+    }
     c->buffer[i] = buffer;
     return i;
 }
