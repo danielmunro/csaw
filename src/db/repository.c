@@ -15,5 +15,7 @@ char *create_room_query(int room_id) {
 
 PGresult *fetch_exits_for_room(RoomT *room) {
     char *query = create_room_query(get_room_id(room));
-    return PQexec(conn, query);
+    PGresult *result = PQexec(conn, query);
+    free(query);
+    return result;
 }
