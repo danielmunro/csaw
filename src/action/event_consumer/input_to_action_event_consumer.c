@@ -5,10 +5,12 @@ void consume_input_to_action_event(GameServiceT *game_service, Event *event) {
             Event *action_event = create_action_event(game_service->action_table->actions[i]);
             dispatch_event(game_service, action_event);
             if (action_event->status == LiveEventStatus) {
-                action->action(game_service, create_request(
+                Request *request = create_request(
                         action->action_type,
                         event->mob,
-                        event->buffer));
+                        event->buffer);
+                action->action(game_service, request);
+                free(request);
             }
             free(action_event);
             return;
