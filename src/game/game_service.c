@@ -64,8 +64,10 @@ void check_client_buffers(GameServiceT *g) {
     ClientReadBuffers *clientReadBuffers = read_client_buffers(g->server);
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (clientReadBuffers->buffers[i]) {
-            dispatch_event(g, create_client_input_event(
-                    clientReadBuffers->buffers[i]->client, clientReadBuffers->buffers[i]->buffer));
+            Event *event = create_client_input_event(
+                    clientReadBuffers->buffers[i]->client, clientReadBuffers->buffers[i]->buffer);
+            dispatch_event(g, event);
+            free(event);
         }
     }
 }
