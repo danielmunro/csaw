@@ -4,9 +4,11 @@ int id_from_pgresult(PGresult *result, int row, int index) {
 }
 
 Room *hydrate_room(PGresult *result, int row) {
+    uuid_t uuid;
+    uuid_parse(PQgetvalue(result, row, 1), uuid);
     return create_room(
             id_from_pgresult(result, row, 0),
-            uuid_from_string(PQgetvalue(result, row, 1)),
+            uuid,
             PQgetvalue(result, row, 2));
 }
 

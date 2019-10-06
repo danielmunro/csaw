@@ -1,6 +1,8 @@
 void test_room_to_string() {
     // setup
-    Room *room = create_room(0, uuid_from_string("640d7f58-5afe-4119-9da4-ce045451cfb7"), "test room");
+    uuid_t uuid;
+    uuid_generate_random(uuid);
+    Room *room = create_room(0, uuid, "test room");
 
     // when
     char *desc1 = room_to_string(room);

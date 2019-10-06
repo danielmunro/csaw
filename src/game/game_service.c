@@ -61,15 +61,16 @@ void dispatch_event(GameServiceT *game_service, Event *event) {
 }
 
 void check_client_buffers(GameServiceT *g) {
-    ClientReadBuffers *clientReadBuffers = read_client_buffers(g->server);
+    ClientReadBuffers *bufs = read_client_buffers(g->server);
     for (int i = 0; i < MAX_CLIENTS; i++) {
-        if (clientReadBuffers->buffers[i]) {
+        if (bufs->buffers[i]) {
             Event *event = create_client_input_event(
-                    clientReadBuffers->buffers[i]->client, clientReadBuffers->buffers[i]->buffer);
+                    bufs->buffers[i]->client, bufs->buffers[i]->buffer);
             dispatch_event(g, event);
             free(event);
         }
     }
+    free(bufs);
 }
 
 void start_game_service(GameServiceT *g) {

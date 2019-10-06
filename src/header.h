@@ -9,8 +9,6 @@
 enum ActionType;
 enum EventType;
 
-typedef struct Uuid UuidT;
-
 /**
  * Game service
  */
@@ -49,7 +47,6 @@ typedef struct Exit ExitT;
 typedef struct RoomTable RoomTableT;
 RoomTableT *hydrate_room_table(PGresult *result);
 
-#include "uuid.c"
 #include "queries.h"
 #include "db/db.h"
 #include "mob/mob.h"
