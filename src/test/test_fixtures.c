@@ -10,3 +10,10 @@ Mob *create_test_mob() {
     mob_fixture_id++;
     return mob;
 }
+
+Room *create_test_room() {
+    uuid_t uuid;
+    uuid_generate_random(uuid);
+    Room *room = create_room(0, uuid, "test room");
+    return room;
+}
