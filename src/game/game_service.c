@@ -22,14 +22,16 @@ GameServiceT *create_game_service() {
     return g;
 }
 
-void add_mob_location(GameServiceT *game_service, Mob *mob, Room *room) {
-    for (int i = 0; i < MAX_MOBS_PER_ROOM; i++) {
-        if (!game_service->location_table->rooms[room->id][i]) {
-            game_service->location_table->rooms[room->id][i] = mob;
-            mob->room = room;
-            return;
+Room *get_mob_room(GameServiceT *game_service, Mob *mob) {
+    int id = get_mob_room_id(game_service->location_table, mob);
+    if (id) {
+        for (int i = 0; i < MAX_ROOMS; i++) {
+            if (game_service->room_table->rooms[i] && game_service->room_table->rooms[i]->id == id) {
+                return game_service->room_table->rooms[i];
+            }
         }
     }
+    return NULL;
 }
 
 ClientT *get_client(GameServiceT *game_service, int i) {
