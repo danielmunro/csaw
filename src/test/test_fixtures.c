@@ -21,8 +21,8 @@ Room *create_test_room() {
 void *create_test_area(GameServiceT *game_service) {
     Room *room1 = create_test_room();
     Room *room2 = create_test_room();
-    room1->exits[0] = create_exit(0, room1, room2, get_direction_from_string("north"));
-    room2->exits[0] = create_exit(0, room2, room1, get_direction_from_string("south"));
+    room1->exits[0] = create_exit(0, room1, room2, NorthDirection);
+    room2->exits[0] = create_exit(0, room2, room1, SouthDirection);
     game_service->room_table->rooms[0] = room1;
     game_service->room_table->rooms[1] = room2;
 }
