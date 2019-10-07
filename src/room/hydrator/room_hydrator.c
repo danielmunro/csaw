@@ -17,7 +17,7 @@ Exit *hydrate_exit(RoomTable *room_table, PGresult *result, int row) {
             id_from_pgresult(result, row, 0),
             get_room(room_table, strtol(PQgetvalue(result, row, 1), 0, 10)),
             get_room(room_table, strtol(PQgetvalue(result, row, 2), 0, 10)),
-            PQgetvalue(result, row, 3));
+            get_direction_from_string(PQgetvalue(result, row, 3)));
 }
 
 void *hydrate_exits(RoomTableT *room_table, RoomT *room, PGresult *result) {

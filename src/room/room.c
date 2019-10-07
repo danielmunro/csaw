@@ -26,7 +26,7 @@ char *room_to_string(Room *room) {
     strcat(out, "\nExits [");
     for (int j = 0; j < MAX_EXITS - 1; j++) {
         if (room->exits[j]) {
-            strncat(out, room->exits[j]->direction, 1);
+            strncat(out, get_string_from_direction(room->exits[j]->direction), 1);
         }
     }
     strcat(out, "]");
