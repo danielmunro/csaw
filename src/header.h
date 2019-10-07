@@ -57,7 +57,7 @@ RoomTableT *hydrate_room_table(PGresult *result);
 #include "db/db.h"
 #include "mob/mob.h"
 #include "room/room.h"
-#include "mob/location_table.c"
+#include "game/location_table.c"
 #include "action/action_type.c"
 #include "request/request.c"
 #include "socket/socket.h"
