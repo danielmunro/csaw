@@ -38,6 +38,14 @@ void add_mob_location(LocationTable *location_table, Mob *mob, RoomT *room) {
     }
 }
 
+void move_mob(LocationTable *location_table, Mob *mob, RoomT *room, enum Direction direction) {
+    for (int i = 0; i < MAX_EXITS; i++) {
+        if (room->exits[i] && room->exits[i]->direction == direction) {
+            add_mob_location(location_table, mob, room->exits[i]->destination);
+        }
+    }
+}
+
 int get_mob_room_id(LocationTable *location_table, Mob *mob) {
     for (int i = 0; i < MAX_ROOMS; i++) {
         if (location_table->rooms[i] && is_mob_in_array(location_table->rooms[i], mob)) {

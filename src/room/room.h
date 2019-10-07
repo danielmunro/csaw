@@ -1,4 +1,3 @@
-#include "direction.c"
 #include "exit.c"
 #include "room.c"
 #include "room_table.c"

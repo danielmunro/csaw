@@ -3,8 +3,10 @@
 #include <uuid/uuid.h>
 #include <libpq-fe.h>
 #include <string.h>
+
 #define MAX_ROOMS 12000
 #define MAX_MOBS_PER_ROOM 50
+#define MAX_EXITS 6
 
 enum ActionType;
 enum EventType;
@@ -31,8 +33,6 @@ LocationTableT *get_location_table(GameServiceT *game_service);
 typedef struct Mob MobT;
 MobT *create_mob(int id, uuid_t uuid, char *name);
 
-typedef struct MobLocation MobLocationT;
-
 /**
  * Mob Table
  */
@@ -45,7 +45,6 @@ MobTableT *hydrate_mob_table(PGresult *result);
 typedef struct Room RoomT;
 int get_room_id(RoomT *room);
 
-typedef struct Exit ExitT;
 
 /**
  * Room Table
@@ -53,10 +52,12 @@ typedef struct Exit ExitT;
 typedef struct RoomTable RoomTableT;
 RoomTableT *hydrate_room_table(PGresult *result);
 
+#include "room/direction.c"
 #include "queries.h"
 #include "db/db.h"
 #include "mob/mob.h"
 #include "room/room.h"
+#include "mob/location_table.c"
 #include "action/action_type.c"
 #include "request/request.c"
 #include "socket/socket.h"

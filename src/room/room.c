@@ -1,5 +1,3 @@
-#define MAX_EXITS 6
-
 typedef struct Room {
     int id;
     uuid_t uuid;

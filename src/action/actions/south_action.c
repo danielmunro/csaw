@@ -1,13 +1,13 @@
 void do_south_action(GameServiceT *game_service, Request *request) {
     Room *room = request->mob->room;
-    if (room) {
-        for (int i = 0; i < MAX_EXITS; i++) {
-            if (room->exits[i] && room->exits[i]->direction == SouthDirection) {
-                LocationTable *location_table = get_location_table(game_service);
-                add_mob_location(location_table, request->mob, room->exits[i]->destination);
-            }
-        }
+    if (!room) {
+        return;
     }
+    move_mob(
+            get_location_table(game_service),
+            request->mob,
+            request->mob->room,
+            get_direction_from_string(request->buffer));
 }
 
 ActionT *create_south_action() {
