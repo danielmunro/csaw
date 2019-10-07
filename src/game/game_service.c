@@ -8,7 +8,7 @@ struct GameService {
     RoomTable *room_table;
     LocationTable *location_table;
     enum GameServiceStatus status;
-};
+} GameService;
 
 GameServiceT *create_game_service() {
     GameServiceT *g = malloc(sizeof(struct GameService));
@@ -20,6 +20,10 @@ GameServiceT *create_game_service() {
     g->location_table = create_location_table();
     g->status = Initialized;
     return g;
+}
+
+LocationTable *get_location_table(GameServiceT *game_service) {
+    return game_service->location_table;
 }
 
 Room *get_mob_room(GameServiceT *game_service, Mob *mob) {

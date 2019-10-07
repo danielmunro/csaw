@@ -20,6 +20,12 @@ ClientT *get_client(GameServiceT *game_service, int i);
 ActionT *get_action(GameServiceT *game_service, char *name_partial);
 
 /**
+ * Location Table
+ */
+typedef struct LocationTable LocationTableT;
+LocationTableT *get_location_table(GameServiceT *game_service);
+
+/**
  * Mobs
  */
 typedef struct Mob MobT;
