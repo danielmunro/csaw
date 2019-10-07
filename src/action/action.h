@@ -1,5 +1,6 @@
 #include "action.c"
 #include "actions/say_action.c"
-#include "actions/south_action.c"
+#include "actions/move/south_action.c"
+#include "actions/move/north_action.c"
 #include "actions/look_action.c"
 #include "action_table.c"
