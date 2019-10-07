@@ -3,7 +3,7 @@ void do_south_action(GameServiceT *game_service, Request *request) {
             get_location_table(game_service),
             request->mob,
             request->mob->room,
-            get_direction_from_string(request->buffer));
+            SouthDirection);
 }
 
 ActionT *create_south_action() {
