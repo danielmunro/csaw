@@ -20,7 +20,7 @@ Exit *hydrate_exit(RoomTable *room_table, PGresult *result, int row) {
             get_direction_from_string(PQgetvalue(result, row, 3)));
 }
 
-void *hydrate_exits(RoomTableT *room_table, RoomT *room, PGresult *result) {
+void hydrate_exits(RoomTableT *room_table, RoomT *room, PGresult *result) {
     int rows = PQntuples(result);
     for (int i = 0; i < rows; i++) {
         room->exits[i] = hydrate_exit(room_table, result, i);

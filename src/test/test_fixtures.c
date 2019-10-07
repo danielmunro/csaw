@@ -18,7 +18,7 @@ Room *create_test_room() {
     return room;
 }
 
-void *create_test_area(GameServiceT *game_service) {
+void create_test_area(GameServiceT *game_service) {
     Room *room1 = create_test_room();
     Room *room2 = create_test_room();
     room1->exits[0] = create_exit(0, room1, room2, NorthDirection);
