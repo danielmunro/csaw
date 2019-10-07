@@ -17,3 +17,4 @@ Room *create_test_room() {
     Room *room = create_room(0, uuid, "test room");
     return room;
 }
+

@@ -1,8 +1,4 @@
 void do_south_action(GameServiceT *game_service, Request *request) {
-    Room *room = request->mob->room;
-    if (!room) {
-        return;
-    }
     move_mob(
             get_location_table(game_service),
             request->mob,
