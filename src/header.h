@@ -52,6 +52,12 @@ int get_room_id(RoomT *room);
 typedef struct RoomTable RoomTableT;
 RoomTableT *hydrate_room_table(PGresult *result);
 
+/**
+ * Actions
+ */
+typedef struct Request RequestT;
+void do_look_action(GameServiceT *game_service, RequestT *request);
+
 #include "room/direction.c"
 #include "queries.h"
 #include "db/db.h"

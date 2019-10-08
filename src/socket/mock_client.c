@@ -36,6 +36,12 @@ MessageCollection *get_mock_message_collection() {
     return _m;
 }
 
+void clear_mock_message_collection() {
+    free(_m);
+    m_index = 0;
+    initialized = 0;
+}
+
 int mock_send_to_client(ClientT *c, char *buffer) {
     MessageCollection *message_collection = get_mock_message_collection();
     message_collection->messages[m_index] = create_sent_message(c, buffer);

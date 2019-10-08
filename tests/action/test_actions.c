@@ -67,3 +67,23 @@ void test_invalid_move_does_nothing() {
     // then
     assert(c->mob->room == g->room_table->rooms[0]);
 }
+
+void test_moving_sends_a_room_description_to_mob() {
+    // setup
+    clear_mock_message_collection();
+    GameServiceT *g = create_game_service();
+    ClientT *c = create_client(g->server, TEST_SOCKET);
+    c->mob = create_test_mob();
+    create_test_area(g);
+
+    // given
+    add_mob_location(g->location_table, c->mob, g->room_table->rooms[0]);
+
+    // when
+    do_north_action(g, create_request(North, c->mob, "north"));
+
+    // then
+    MessageCollection *m = get_mock_message_collection();
+    char *out = room_to_string(g->room_table->rooms[1]);
+    assert(strncmp(m->messages[0]->buffer, out, strlen(out)) == 0);
+}

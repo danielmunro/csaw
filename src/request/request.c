@@ -1,4 +1,4 @@
-typedef struct {
+typedef struct Request {
     enum ActionType action_type;
     Mob *mob;
     char * buffer;

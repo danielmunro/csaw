@@ -6,4 +6,5 @@ int main() {
     test_mob_moves_north();
     test_mob_moves_south();
     test_invalid_move_does_nothing();
+    test_moving_sends_a_room_description_to_mob();
 }

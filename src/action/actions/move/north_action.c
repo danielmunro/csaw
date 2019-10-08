@@ -4,6 +4,7 @@ void do_north_action(GameServiceT *game_service, Request *request) {
             request->mob,
             request->mob->room,
             NorthDirection);
+    do_look_action(game_service, request);
 }
 
 ActionT *create_north_action() {
