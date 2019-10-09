@@ -77,7 +77,7 @@ ClientT *create_client(Server *s, int new_socket) {
             return s->clients[i];
         }
     }
-    return 0;
+    return NULL;
 }
 
 ClientT *new_connection(Server *s) {
@@ -85,7 +85,7 @@ ClientT *new_connection(Server *s) {
     int new_socket = accept(s->main_socket, (struct sockaddr *)&s->address, (socklen_t*)&addrlen);
     if (new_socket < 0) {
         perror("accept");
-        return 0;
+        return NULL;
     }
     printf("New connection, socket fd is %d, ip is : %s, port : %d\n",
            new_socket, inet_ntoa(s->address.sin_addr), ntohs(s->address.sin_port));

@@ -19,7 +19,7 @@ void test_create_client_adds_client_to_server() {
     ClientT *c = create_client(s, TEST_SOCKET);
 
     // then
-    assert(c != 0);
+    assert(c != NULL);
 }
 
 void test_new_connection_creates_client() {
@@ -30,7 +30,7 @@ void test_new_connection_creates_client() {
     ClientT *c = new_connection(s);
 
     // then
-    assert(c != 0);
+    assert(c != NULL);
 }
 
 void test_end_client_session_removes_client_from_server() {
