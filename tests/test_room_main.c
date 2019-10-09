@@ -2,5 +2,9 @@
 #include "header.h"
 
 int main() {
-    test_room_to_string();
+    void (*tests[MAX_TESTS])() = {
+            test_room_to_string,
+    };
+    TestSuite *ts = create_test_suite(tests);
+    run_tests(ts);
 }

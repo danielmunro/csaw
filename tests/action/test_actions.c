@@ -70,7 +70,6 @@ void test_invalid_move_does_nothing() {
 
 void test_moving_sends_a_room_description_to_mob() {
     // setup
-    clear_mock_message_collection();
     GameServiceT *g = create_game_service();
     ClientT *c = create_client(g->server, TEST_SOCKET);
     c->mob = create_test_mob();

@@ -2,6 +2,9 @@
 #include "header.h"
 
 int main() {
-    // test_client
-    test_send_to_client_writes_data();
+    void (*tests[MAX_TESTS])() = {
+            test_send_to_client_writes_data,
+    };
+    TestSuite *ts = create_test_suite(tests);
+    run_tests(ts);
 }
