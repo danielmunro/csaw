@@ -1,1 +1,1 @@
-enum EventType { InputEventType, MobMovedEventType, AttackEventType, ActionEventType };
+enum EventType { InputEventType, MobMovedEventType, AttackEventType, ActionEventType, LoginEventType };

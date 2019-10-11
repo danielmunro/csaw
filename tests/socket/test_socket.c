@@ -56,5 +56,5 @@ void test_read_socket_adds_to_client_buffer() {
     read_client_socket(s, c);
 
     // then
-    assert(strlen(s->clients[0]->buffer[0]) > 0);
+    assert(strlen((char *) s->clients[0]->buffer[0]) > 0);
 }

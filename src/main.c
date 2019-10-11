@@ -5,6 +5,7 @@ void listen_csaw() {
     open_main_socket(game_service->server);
     game_service->event_dispatcher->consumers[0] = create_echo_event_consumer();
     game_service->event_dispatcher->consumers[1] = create_input_to_action_event_consumer();
+    game_service->event_dispatcher->consumers[2] = create_dummy_login_event_consumer();
     start_game_service(game_service);
 }
 

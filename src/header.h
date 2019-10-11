@@ -17,9 +17,11 @@ enum EventType;
 typedef struct GameService GameServiceT;
 typedef struct Action ActionT;
 typedef struct Client ClientT;
+typedef struct Server ServerT;
 void client_send_to_clients(GameServiceT *game_service, ClientT *client, char *buffer);
 ClientT *get_client(GameServiceT *game_service, int i);
 ActionT *get_action(GameServiceT *game_service, char *name_partial);
+ServerT *get_server(GameServiceT *game_service);
 
 /**
  * Location Table
@@ -57,6 +59,13 @@ RoomTableT *hydrate_room_table(PGresult *result);
  */
 typedef struct Request RequestT;
 void do_look_action(GameServiceT *game_service, RequestT *request);
+
+/**
+ * Events
+ */
+typedef struct Event EventT;
+void dispatch_event(GameServiceT *game_service, EventT *event);
+EventT *create_login_event(ClientT *client);
 
 #include "room/direction.c"
 #include "queries.h"

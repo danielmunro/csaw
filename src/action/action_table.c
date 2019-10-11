@@ -6,6 +6,10 @@ typedef struct {
 
 ActionTable *create_action_table() {
     ActionTable *a = malloc(sizeof(ActionTable));
+    for(int i = 0; i < MAX_ACTIONS; i++) {
+        a->actions[i] = NULL;
+    }
+
     // movement
     a->actions[0] = create_south_action();
     a->actions[1] = create_north_action();

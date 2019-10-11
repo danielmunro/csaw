@@ -5,7 +5,11 @@ typedef struct {
 } EventDispatcher;
 
 EventDispatcher *create_event_dispatcher() {
-    return malloc(sizeof(EventDispatcher));
+    EventDispatcher *event_dispatcher = malloc(sizeof(EventDispatcher));
+    for (int i = 0; i < MAX_EVENT_CONSUMERS; i++) {
+        event_dispatcher->consumers[i] = NULL;
+    }
+    return event_dispatcher;
 }
 
 int ready_to_consume(EventConsumer *consumer, Event *event) {

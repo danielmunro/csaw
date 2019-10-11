@@ -26,38 +26,37 @@ LocationTable *get_location_table(GameServiceT *game_service) {
     return game_service->location_table;
 }
 
-Room *get_mob_room(GameServiceT *game_service, Mob *mob) {
-    int id = get_mob_room_id(game_service->location_table, mob);
-    if (id) {
-        for (int i = 0; i < MAX_ROOMS; i++) {
-            if (game_service->room_table->rooms[i] && game_service->room_table->rooms[i]->id == id) {
-                return game_service->room_table->rooms[i];
-            }
-        }
-    }
-    return NULL;
+Server *get_server(GameServiceT *game_service) {
+    return game_service->server;
 }
 
 ClientT *get_client(GameServiceT *game_service, int i) {
     return game_service->server->clients[i];
 }
 
-int input_matches_action(ActionT *action, char *name_partial) {
-    return action && strncmp(action->name, name_partial, strlen(name_partial)) == 0;
-}
-
 ActionT *get_action(GameServiceT *game_service, char *name_partial) {
+    printf("get_action sanity, name partial: %s\n", name_partial);
     for (int i = 0; i < MAX_ACTIONS; i++) {
-        if (input_matches_action(game_service->action_table->actions[i], name_partial)) {
+        ActionT *action = game_service->action_table->actions[i];
+        if (action && strncmp(action->name, name_partial, strlen(name_partial)) == 0) {
+            printf("action: %s, input: %s, input length: %lu\n", action->name, name_partial, strlen(name_partial));
             return game_service->action_table->actions[i];
         }
     }
-    return 0;
+    return NULL;
 }
 
 void dispatch_event(GameServiceT *game_service, Event *event) {
+    printf("dispatching event for %d\n", event->event_type);
     for (int i = 0; i < MAX_EVENT_CONSUMERS; i++) {
+        printf("event consumer index %d\n", i);
+        if (!game_service->event_dispatcher->consumers[i]) {
+            puts("done with event consumers");
+            return;
+        }
+        puts("proceeding");
         if (ready_to_consume(game_service->event_dispatcher->consumers[i], event)) {
+            puts("consuming event");
             game_service->event_dispatcher->consumers[i]->consume(game_service, event);
             if (event->status == TerminatedEventStatus) {
                 return;
@@ -67,15 +66,19 @@ void dispatch_event(GameServiceT *game_service, Event *event) {
 }
 
 void check_client_buffers(GameServiceT *g) {
+    puts("start check client buffers");
     ClientReadBuffers *bufs = read_client_buffers(g->server);
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (bufs->buffers[i]) {
+            printf("buffer %d\n", i);
             Event *event = create_client_input_event(
                     bufs->buffers[i]->client, bufs->buffers[i]->buffer);
             dispatch_event(g, event);
             free(event);
+            puts("event dispatched");
         }
     }
+    puts("done checking buffers");
     free(bufs);
 }
 
@@ -83,7 +86,7 @@ void start_game_service(GameServiceT *g) {
     g->status = Running;
     puts("starting game loop");
     while(g->status == Running) {
-        loop_server(g->server);
+        loop_server(g);
         check_client_buffers(g);
     }
 }
