@@ -3,11 +3,18 @@ typedef struct LocationTable {
 } LocationTable;
 
 LocationTable *create_location_table() {
-    return malloc(sizeof(LocationTable));
+    LocationTable *location_table = malloc(sizeof(LocationTable));
+    for (int i = 0; i < MAX_ROOMS; i++) {
+        Mob *rooms[MAX_MOBS_PER_ROOM] = {};
+        memcpy(location_table->rooms[i], rooms, 0);
+    }
+    return location_table;
 }
 
 int is_mob_in_array(Mob *mobs[MAX_MOBS_PER_ROOM], Mob *mob) {
-    for (int i = 0; i < MAX_MOBS_PER_ROOM - 1; i++) {
+    puts("start is mob in array");
+    for (int i = 0; i < MAX_MOBS_PER_ROOM; i++) {
+        printf("is_mob_in_array %d\n", i);
         if (mobs[i] && mobs[i] == mob) {
             return i;
         }
@@ -17,21 +24,24 @@ int is_mob_in_array(Mob *mobs[MAX_MOBS_PER_ROOM], Mob *mob) {
 
 void remove_mob_from_room(LocationTable *location_table, Mob *mob) {
     if (mob->room) {
-        int room_id = get_room_id(mob->room);
-        int index = is_mob_in_array(location_table->rooms[room_id], mob);
-        if (index) {
-            location_table->rooms[room_id][index] = NULL;
+        puts("remove mob from current room");
+        int index = is_mob_in_array(location_table->rooms[mob->room->id], mob);
+        printf("index found: %d\n", index);
+        if (index > -1) {
+            location_table->rooms[mob->room->id][index] = NULL;
         }
         mob->room = NULL;
     }
+    puts("done remove mob");
 }
 
 void add_mob_location(LocationTable *location_table, Mob *mob, RoomT *room) {
-    int id = get_room_id(room);
+    printf("add mob to room %d\n", room->id);
     remove_mob_from_room(location_table, mob);
     for (int i = 0; i < MAX_MOBS_PER_ROOM; i++) {
-        if (!location_table->rooms[id][i]) {
-            location_table->rooms[id][i] = mob;
+        printf("add loop index %d\n", i);
+        if (!location_table->rooms[room->id][i]) {
+            location_table->rooms[room->id][i] = mob;
             mob->room = room;
             return;
         }
