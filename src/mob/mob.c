@@ -12,5 +12,6 @@ Mob *create_mob(int id, uuid_t uuid, char *name) {
   m->id = id;
   uuid_copy(m->uuid, uuid);
   strcpy(m->name, name);
+  m->room = NULL;
   return m;
 }
