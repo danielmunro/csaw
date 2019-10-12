@@ -31,7 +31,7 @@ int get_buffer_index(ClientT *c) {
 
 int add_buffer_to_client(ClientT *c, char *buffer) {
     int i = get_buffer_index(c);
-    memcpy(c->buffer[i], buffer, strlen(buffer));
+    memcpy(c->buffer[i], buffer, strlen(buffer) - 2);
     return i;
 }
 
