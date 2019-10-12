@@ -3,6 +3,7 @@
 #include <uuid/uuid.h>
 #include <libpq-fe.h>
 #include <string.h>
+#include <stdarg.h>
 
 #define MAX_ROOMS 12000
 #define MAX_MOBS_PER_ROOM 50
@@ -10,6 +11,7 @@
 
 enum ActionType;
 enum EventType;
+int DEBUG;
 
 /**
  * Game service
@@ -67,6 +69,7 @@ typedef struct Event EventT;
 void dispatch_event(GameServiceT *game_service, EventT *event);
 EventT *create_login_event(ClientT *client);
 
+#include "log/log_utility.c"
 #include "room/direction.c"
 #include "queries.h"
 #include "db/db.h"

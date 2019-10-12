@@ -125,19 +125,18 @@ void read_client_socket(Server *s, ClientT *client) {
         return;
     }
     buffer[value] = '\0';
-    printf("--------> read_client_socket with value: %s, length: %lu\n", buffer, strlen(buffer));
+    debug_printf("read client socket with value: %s, length: %lu\n", buffer, strlen(buffer));
     add_buffer_to_client(client, buffer);
 }
 
 void check_clients(Server *s) {
-    puts("check clients start");
+    debug_puts("check clients start");
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (s->clients[i] && FD_ISSET(s->clients[i]->socket, &s->reading_fds)) {
-            puts("read client socket");
             read_client_socket(s, s->clients[i]);
         }
     }
-    puts("done check clients");
+    debug_puts("done check clients");
 }
 
 void select_sockets(Server *s) {
@@ -160,29 +159,26 @@ ClientReadBuffers *read_client_buffers(Server *s) {
 }
 
 void loop_server(GameServiceT *game_service) {
-    puts("start loop server");
+    debug_puts("start loop server");
     ServerT *s = get_server(game_service);
     FD_ZERO(&s->reading_fds);
     FD_SET(s->main_socket, &s->reading_fds);
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (s->clients[i]) {
-            puts("has client");
             FD_SET(s->clients[i]->socket, &s->reading_fds);
         }
     }
     select_sockets(s);
-    puts("after select socket");
     if (FD_ISSET(s->main_socket, &s->reading_fds)) {
-        puts("sanity add socket");
         ClientT *c = new_connection(s);
         if (!c) {
             perror("accept");
             exit(1);
         }
-        puts("creating login event");
         EventT *event = create_login_event(c);
         dispatch_event(game_service, event);
         free(event);
     }
     check_clients(s);
+    debug_puts("end loop server");
 }

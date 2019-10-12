@@ -17,6 +17,7 @@ Event *create_event(enum EventType event_type) {
 Event *create_client_input_event(ClientT *client, char *buffer) {
     Event *event = create_event(InputEventType);
     event->client = client;
+    event->mob = client->mob;
     event->buffer = buffer;
     return event;
 }
