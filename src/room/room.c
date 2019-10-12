@@ -1,7 +1,10 @@
+#define ROOM_NAME_MAX_LENGTH 200
+#define ROOM_DESCRIPTION_MAX_LENGTH 2048
+
 typedef struct Room {
     int id;
     uuid_t uuid;
-    char name[200];
+    char name[ROOM_NAME_MAX_LENGTH];
     Exit *exits[MAX_EXITS];
 } Room;
 
@@ -22,7 +25,7 @@ int get_room_id(Room *room) {
 
 char *room_to_string(Room *room) {
     char *out;
-    out = (char *) malloc(100);
+    out = (char *) malloc(ROOM_DESCRIPTION_MAX_LENGTH);
     strcat(out, room->name);
     strcat(out, "\nExits [");
     for (int j = 0; j < MAX_EXITS; j++) {

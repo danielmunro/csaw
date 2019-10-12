@@ -34,6 +34,15 @@ ClientT *get_client(GameServiceT *game_service, int i) {
     return game_service->server->clients[i];
 }
 
+ClientT *get_client_from_mob(GameServiceT *game_service, Mob *mob) {
+    for (int i = 0; i < MAX_CLIENTS; i++) {
+        if (game_service->server->clients[i] && game_service->server->clients[i]->mob == mob) {
+            return game_service->server->clients[i];
+        }
+    }
+    return NULL;
+}
+
 ActionT *get_action(GameServiceT *game_service, char *name_partial) {
     for (int i = 0; i < MAX_ACTIONS; i++) {
         ActionT *action = game_service->action_table->actions[i];

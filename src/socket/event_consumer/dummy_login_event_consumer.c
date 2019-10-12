@@ -1,5 +1,11 @@
+void look_on_login(GameServiceT *game_service, Mob *mob) {
+    RequestT *request = create_request(Look, mob, "look");
+    do_look_action(game_service, request);
+    free(request);
+}
+
 void dummy_login_event_consumer(GameServiceT *game_service, Event *event) {
-    debug_puts("dummy login event consumer");
+    debug_printf("dummy login event consumer for client %d", event->client->socket);
     uuid_t uuid;
     uuid_generate_random(uuid);
     Mob *mob = create_mob(0, uuid,  "dummy");
@@ -10,9 +16,7 @@ void dummy_login_event_consumer(GameServiceT *game_service, Event *event) {
             game_service->location_table,
             mob,
             room);
-    RequestT *request = create_request(Look, mob, "look");
-    do_look_action(game_service, request);
-    free(request);
+    look_on_login(game_service, mob);
 }
 
 EventConsumer *create_dummy_login_event_consumer() {
