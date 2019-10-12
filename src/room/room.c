@@ -10,6 +10,9 @@ Room *create_room(int id, uuid_t uuid, char *name) {
     room->id = id;
     uuid_copy(room->uuid, uuid);
     strcpy(room->name, name);
+    for (int i = 0; i < MAX_EXITS; i++) {
+        room->exits[i] = NULL;
+    }
     return room;
 }
 
@@ -22,7 +25,7 @@ char *room_to_string(Room *room) {
     out = (char *) malloc(100);
     strcat(out, room->name);
     strcat(out, "\nExits [");
-    for (int j = 0; j < MAX_EXITS - 1; j++) {
+    for (int j = 0; j < MAX_EXITS; j++) {
         if (room->exits[j]) {
             strncat(out, get_string_from_direction(room->exits[j]->direction), 1);
         }
