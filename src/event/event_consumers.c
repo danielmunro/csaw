@@ -1,4 +1,4 @@
-typedef struct {
+typedef struct EventConsumer {
     enum EventType event_type;
     void (*consume)(GameServiceT *game_service, Event *event);
 } EventConsumer;

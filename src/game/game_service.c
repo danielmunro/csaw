@@ -22,6 +22,11 @@ GameServiceT *create_game_service() {
     return g;
 }
 
+void register_event_consumers(EventDispatcher *event_dispatcher) {
+    event_dispatcher->consumers[0] = create_input_to_action_event_consumer();
+    event_dispatcher->consumers[1] = create_dummy_login_event_consumer();
+}
+
 LocationTable *get_location_table(GameServiceT *game_service) {
     return game_service->location_table;
 }

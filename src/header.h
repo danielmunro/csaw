@@ -66,9 +66,14 @@ void do_look_action(GameServiceT *game_service, RequestT *request);
 /**
  * Events
  */
+ typedef struct EventConsumer EventConsumerT;
 typedef struct Event EventT;
 void dispatch_event(GameServiceT *game_service, EventT *event);
 EventT *create_login_event(ClientT *client);
+
+EventConsumerT *create_echo_event_consumer();
+EventConsumerT *create_input_to_action_event_consumer();
+EventConsumerT *create_dummy_login_event_consumer();
 
 #include "log/log_utility.c"
 #include "room/direction.c"
