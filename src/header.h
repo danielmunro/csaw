@@ -37,19 +37,20 @@ LocationTableT *get_location_table(GameServiceT *game_service);
 typedef struct Mob MobT;
 MobT *create_mob(int id, uuid_t uuid, char *name);
 ClientT *get_client_from_mob(GameServiceT *game_service, MobT *mob); // game service
+MobT *get_mob_by_id(GameServiceT *game_service, int id); // game service
 
-/**
- * Mob Table
- */
+typedef struct MobResetTable MobResetTableT;
+
 typedef struct MobTable MobTableT;
 MobTableT *hydrate_mob_table(PGresult *result);
+MobResetTableT *hydrate_mob_reset_table(GameServiceT *game_service, PGresult *result);
 
 /**
  * Rooms
  */
 typedef struct Room RoomT;
 int get_room_id(RoomT *room);
-
+RoomT *get_room_by_id(GameServiceT *game_service, int id); // game service
 
 /**
  * Room Table
@@ -71,7 +72,6 @@ typedef struct Event EventT;
 void dispatch_event(GameServiceT *game_service, EventT *event);
 EventT *create_login_event(ClientT *client);
 
-EventConsumerT *create_echo_event_consumer();
 EventConsumerT *create_input_to_action_event_consumer();
 EventConsumerT *create_dummy_login_event_consumer();
 

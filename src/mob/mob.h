@@ -1,3 +1,6 @@
 #include "mob.c"
 #include "mob_table.c"
 #include "hydrator/mob_hydrator.c"
+#include "reset/mob_reset.c"
+#include "reset/mob_reset_table.c"
+#include "hydrator/mob_reset_hydrator.c"

@@ -1,12 +1,13 @@
 enum GameServiceStatus { Initialized = 1, Running = 2, Stopped = 3 };
 
-struct GameService {
+typedef struct GameService {
     Server *server;
     EventDispatcher *event_dispatcher;
     ActionTable *action_table;
     MobTable *mob_table;
     RoomTable *room_table;
     LocationTable *location_table;
+    MobResetTable *mob_reset_table;
     enum GameServiceStatus status;
 } GameService;
 
@@ -18,6 +19,7 @@ GameServiceT *create_game_service() {
     g->mob_table = create_mob_table();
     g->room_table = create_room_table();
     g->location_table = create_location_table();
+    g->mob_reset_table = create_mob_reset_table(g);
     g->status = Initialized;
     return g;
 }
@@ -101,4 +103,22 @@ void client_send_to_clients(GameServiceT *g, ClientT *c, char *buffer) {
             send_to_client(g->server->clients[i], buffer);
         }
     }
+}
+
+Mob *get_mob_by_id(GameServiceT *g, int id) {
+    for (int i = 0 ; i < MAX_MOBS; i++) {
+        if (g->mob_table->mobs[i] && g->mob_table->mobs[i]->id == id) {
+            return g->mob_table->mobs[i];
+        }
+    }
+    return NULL;
+}
+
+Room *get_room_by_id(GameServiceT *g, int id) {
+    for (int i = 0 ; i < MAX_ROOMS; i++) {
+        if (g->room_table->rooms[i] && g->room_table->rooms[i]->id == id) {
+            return g->room_table->rooms[i];
+        }
+    }
+    return NULL;
 }

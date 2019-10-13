@@ -8,6 +8,10 @@ PGresult *fetch_all_rooms() {
     return PQexec(conn, query_all_rooms);
 }
 
+PGresult *fetch_all_mob_resets() {
+    return PQexec(conn, query_all_mob_resets);
+}
+
 char *create_room_query(int room_id) {
     char *query;
     query = (char *) malloc(QUERY_MAX_LENGTH);
