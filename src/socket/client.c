@@ -1,4 +1,4 @@
-#define MAX_INPUT 100
+#define MAX_INPUT 10
 #define MAX_INPUT_LENGTH 1000
 
 struct Client {
@@ -21,7 +21,7 @@ ClientT *new_client(struct sockaddr_in address, int socket) {
 
 void reset_client_buffer(ClientT *c) {
     for (int i = 0; i < MAX_INPUT; i++) {
-        memcpy(c->buffer[i], "", 0);
+        memcpy(c->buffer[i], NULL, 0);
     }
     c->buffer_index = 0;
 }
@@ -41,9 +41,12 @@ int add_buffer_to_client(ClientT *c, char *buffer) {
 
 char *get_next_buffer(ClientT *c) {
     int i = get_buffer_index(c);
-    c->buffer_index++;
-    debug_printf("calling get_next_buffer with index: %d, new index: %d, buf: %s\n", i, c->buffer_index, c->buffer[i]);
-    return (char *) c->buffer[i];
+    char *buf = (char *) c->buffer[i];
+    if (strlen(buf) > 0) {
+        c->buffer_index++;
+    }
+    debug_printf("calling get_next_buffer with index: %d, new index: %d, buf: %s\n", i, c->buffer_index, buf);
+    return buf;
 }
 
 int send_to_client(ClientT *c, char *buffer) {
