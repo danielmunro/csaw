@@ -4,6 +4,7 @@
 #include <libpq-fe.h>
 #include <string.h>
 #include <stdarg.h>
+#include <time.h>
 
 #define MAX_ROOMS 12000
 #define MAX_MOBS_PER_ROOM 50
@@ -24,6 +25,7 @@ void client_send_to_clients(GameServiceT *game_service, ClientT *client, char *b
 ClientT *get_client(GameServiceT *game_service, int i);
 ActionT *get_action(GameServiceT *game_service, char *name_partial);
 ServerT *get_server(GameServiceT *game_service);
+void reset_client_buffer(ClientT *c);
 
 /**
  * Location Table
@@ -74,6 +76,7 @@ EventT *create_login_event(ClientT *client);
 
 EventConsumerT *create_input_to_action_event_consumer();
 EventConsumerT *create_dummy_login_event_consumer();
+EventConsumerT *create_pulse_to_tick_event_consumer();
 
 #include "log/log_utility.c"
 #include "room/direction.c"

@@ -120,6 +120,7 @@ void end_client_session(Server *s, ClientT *c) {
 void read_client_socket(Server *s, ClientT *client) {
     char raw_buffer[MAX_READ_BUFFER + 1];
     int value = read(client->socket, raw_buffer, MAX_READ_BUFFER);
+    debug_printf("READ from client socket: %s", raw_buffer);
     if (value == 0) {
         end_client_session(s, client);
         return;
@@ -139,22 +140,34 @@ void check_clients(Server *s) {
 }
 
 void select_sockets(Server *s) {
-    select(MAX_CLIENTS, &s->reading_fds, NULL, NULL, NULL);
+    struct timeval tv;
+    tv.tv_sec = 0;
+    tv.tv_usec = 0;
+    select(MAX_CLIENTS, &s->reading_fds, NULL, NULL, &tv);
+}
+
+void reset_client_buffers(Server *s) {
+    for (int i = 0; i < MAX_CLIENTS; i++) {
+        if (s->clients[i]) {
+            reset_client_buffer(s->clients[i]);
+        }
+    }
 }
 
 ClientReadBuffers *read_client_buffers(Server *s) {
-    ClientReadBuffers *clientReadBuffers = create_client_read_buffers();
+    ClientReadBuffers *bufs = create_client_read_buffers();
     int read_buf_index = 0;
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (s->clients[i] && s->clients[i]->delay == 0) {
             char *buffer = get_next_buffer(s->clients[i]);
+            debug_printf("create client read buffer with: %s\n", buffer);
             if (buffer && strlen(buffer) > 0) {
-                clientReadBuffers->buffers[read_buf_index] = create_client_buffer(s->clients[i], buffer);
+                bufs->buffers[read_buf_index] = create_client_buffer(s->clients[i], buffer);
                 read_buf_index++;
             }
         }
     }
-    return clientReadBuffers;
+    return bufs;
 }
 
 void loop_server(GameServiceT *game_service) {

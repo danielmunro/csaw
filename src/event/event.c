@@ -34,3 +34,13 @@ EventT *create_login_event(ClientT *client) {
     event->mob = client->mob;
     return event;
 }
+
+EventT *create_pulse_event() {
+    Event *event = create_event(PulseEventType);
+    return event;
+}
+
+EventT *create_tick_event() {
+    Event *event = create_event(TickEventType);
+    return event;
+}

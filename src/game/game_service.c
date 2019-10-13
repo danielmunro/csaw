@@ -8,6 +8,7 @@ typedef struct GameService {
     RoomTable *room_table;
     LocationTable *location_table;
     MobResetTable *mob_reset_table;
+    TimeService *time_service;
     enum GameServiceStatus status;
 } GameService;
 
@@ -20,6 +21,7 @@ GameServiceT *create_game_service() {
     g->room_table = create_room_table();
     g->location_table = create_location_table();
     g->mob_reset_table = create_mob_reset_table(g);
+    g->time_service = create_time_service();
     g->status = Initialized;
     return g;
 }
@@ -27,6 +29,7 @@ GameServiceT *create_game_service() {
 void register_event_consumers(EventDispatcher *event_dispatcher) {
     event_dispatcher->consumers[0] = create_input_to_action_event_consumer();
     event_dispatcher->consumers[1] = create_dummy_login_event_consumer();
+    event_dispatcher->consumers[2] = create_pulse_to_tick_event_consumer();
 }
 
 LocationTable *get_location_table(GameServiceT *game_service) {
@@ -76,6 +79,7 @@ void dispatch_event(GameServiceT *game_service, Event *event) {
 }
 
 void check_client_buffers(GameServiceT *g) {
+    debug_puts("start check_client_buffers");
     ClientReadBuffers *bufs = read_client_buffers(g->server);
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (bufs->buffers[i]) {
@@ -88,12 +92,22 @@ void check_client_buffers(GameServiceT *g) {
     free(bufs);
 }
 
+void dispatch_pulse_event(GameServiceT *game_service) {
+    Event *event = create_pulse_event();
+    dispatch_event(game_service, event);
+    free(event);
+}
+
 void start_game_service(GameServiceT *g) {
     g->status = Running;
     debug_puts("start game loop");
     while(g->status == Running) {
         loop_server(g);
         check_client_buffers(g);
+        int elapsed_seconds = increment_time(g->time_service);
+        if (elapsed_seconds > 0) {
+            dispatch_pulse_event(g);
+        }
     }
 }
 

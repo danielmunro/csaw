@@ -16,10 +16,14 @@ ClientT *new_client(struct sockaddr_in address, int socket) {
     c->socket = socket;
     c->buffer_index = 0;
     c->delay = 0;
+    return c;
+}
+
+void reset_client_buffer(ClientT *c) {
     for (int i = 0; i < MAX_INPUT; i++) {
         memcpy(c->buffer[i], "", 0);
     }
-    return c;
+    c->buffer_index = 0;
 }
 
 int get_buffer_index(ClientT *c) {
@@ -38,6 +42,7 @@ int add_buffer_to_client(ClientT *c, char *buffer) {
 char *get_next_buffer(ClientT *c) {
     int i = get_buffer_index(c);
     c->buffer_index++;
+    debug_printf("calling get_next_buffer with index: %d, new index: %d, buf: %s\n", i, c->buffer_index, c->buffer[i]);
     return (char *) c->buffer[i];
 }
 
