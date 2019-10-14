@@ -37,7 +37,7 @@ int add_buffer_to_client(ClientT *c, char *buffer) {
 
 char *get_next_buffer(ClientT *c) {
     if (c->index_write == 0) {
-        return "";
+        return NULL;
     }
     if (c->index_write > c->index_read) {
         int i = c->index_read;
@@ -46,7 +46,7 @@ char *get_next_buffer(ClientT *c) {
         return buf;
     }
     reset_client_buffer(c);
-    return "";
+    return NULL;
 }
 
 int send_to_client(ClientT *c, char *buffer) {
