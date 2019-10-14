@@ -25,8 +25,7 @@ int get_room_id(Room *room) {
 
 char *room_to_string(Room *room) {
     char *out = (char *) malloc(ROOM_DESCRIPTION_MAX_LENGTH * sizeof(char));
-    sprintf(out, "%s", room->name);
-    strcat(out, "\nExits [");
+    sprintf(out, "%s\nExits [", room->name);
     for (int j = 0; j < MAX_EXITS; j++) {
         if (room->exits[j]) {
             strncat(out, get_string_from_direction(room->exits[j]->direction), 1);
