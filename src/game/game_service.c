@@ -30,6 +30,7 @@ void register_event_consumers(EventDispatcher *event_dispatcher) {
     event_dispatcher->consumers[0] = create_input_to_action_event_consumer();
     event_dispatcher->consumers[1] = create_dummy_login_event_consumer();
     event_dispatcher->consumers[2] = create_pulse_to_tick_event_consumer();
+    event_dispatcher->consumers[3] = create_increment_ticks_event_consumer();
 }
 
 LocationTable *get_location_table(GameServiceT *game_service) {
@@ -64,7 +65,6 @@ ActionT *get_action(GameServiceT *game_service, char *name_partial) {
 }
 
 void dispatch_event(GameServiceT *game_service, Event *event) {
-    debug_printf("dispatching event type %d\n", event->event_type);
     for (int i = 0; i < MAX_EVENT_CONSUMERS; i++) {
         if (!game_service->event_dispatcher->consumers[i]) {
             return;
@@ -79,7 +79,6 @@ void dispatch_event(GameServiceT *game_service, Event *event) {
 }
 
 void check_client_buffers(GameServiceT *g) {
-    debug_puts("start check_client_buffers");
     ClientReadBuffers *bufs = read_client_buffers(g->server);
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (bufs->buffers[i]) {

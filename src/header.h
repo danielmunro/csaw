@@ -25,7 +25,6 @@ void client_send_to_clients(GameServiceT *game_service, ClientT *client, char *b
 ClientT *get_client(GameServiceT *game_service, int i);
 ActionT *get_action(GameServiceT *game_service, char *name_partial);
 ServerT *get_server(GameServiceT *game_service);
-void reset_client_buffer(ClientT *c);
 
 /**
  * Location Table
@@ -77,6 +76,7 @@ EventT *create_login_event(ClientT *client);
 EventConsumerT *create_input_to_action_event_consumer();
 EventConsumerT *create_dummy_login_event_consumer();
 EventConsumerT *create_pulse_to_tick_event_consumer();
+EventConsumerT *create_increment_ticks_event_consumer();
 
 #include "log/log_utility.c"
 #include "room/direction.c"

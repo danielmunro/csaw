@@ -130,13 +130,11 @@ void read_client_socket(Server *s, ClientT *client) {
 }
 
 void check_clients(Server *s) {
-    debug_puts("check clients start");
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (s->clients[i] && FD_ISSET(s->clients[i]->socket, &s->reading_fds)) {
             read_client_socket(s, s->clients[i]);
         }
     }
-    debug_puts("done check clients");
 }
 
 void select_sockets(Server *s) {
@@ -146,21 +144,12 @@ void select_sockets(Server *s) {
     select(MAX_CLIENTS, &s->reading_fds, NULL, NULL, &tv);
 }
 
-void reset_client_buffers(Server *s) {
-    for (int i = 0; i < MAX_CLIENTS; i++) {
-        if (s->clients[i]) {
-            reset_client_buffer(s->clients[i]);
-        }
-    }
-}
-
 ClientReadBuffers *read_client_buffers(Server *s) {
     ClientReadBuffers *bufs = create_client_read_buffers();
     int read_buf_index = 0;
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (s->clients[i] && s->clients[i]->delay == 0) {
             char *buffer = get_next_buffer(s->clients[i]);
-            debug_printf("create client read buffer with: %s\n", buffer);
             if (buffer && strlen(buffer) > 0) {
                 bufs->buffers[read_buf_index] = create_client_buffer(s->clients[i], buffer);
                 read_buf_index++;
@@ -171,7 +160,6 @@ ClientReadBuffers *read_client_buffers(Server *s) {
 }
 
 void loop_server(GameServiceT *game_service) {
-    debug_puts("start loop server");
     ServerT *s = get_server(game_service);
     FD_ZERO(&s->reading_fds);
     FD_SET(s->main_socket, &s->reading_fds);
@@ -192,5 +180,4 @@ void loop_server(GameServiceT *game_service) {
         free(event);
     }
     check_clients(s);
-    debug_puts("end loop server");
 }

@@ -5,48 +5,48 @@ struct Client {
     struct sockaddr_in address;
     int socket;
     char *buffer[MAX_INPUT][MAX_INPUT_LENGTH];
-    int buffer_index;
+    int index_write;
+    int index_read;
     int delay;
     Mob *mob;
 };
+
+void reset_client_buffer(ClientT *client) {
+    for (int i = 0; i < MAX_INPUT; i++) {
+        memcpy(client->buffer[i], NULL, 0);
+    }
+    client->index_write = 0;
+    client->index_read = 0;
+}
 
 ClientT *new_client(struct sockaddr_in address, int socket) {
     ClientT *c = malloc(sizeof(struct Client));
     c->address = address;
     c->socket = socket;
-    c->buffer_index = 0;
     c->delay = 0;
+    reset_client_buffer(c);
     return c;
 }
 
-void reset_client_buffer(ClientT *c) {
-    for (int i = 0; i < MAX_INPUT; i++) {
-        memcpy(c->buffer[i], NULL, 0);
-    }
-    c->buffer_index = 0;
-}
-
-int get_buffer_index(ClientT *c) {
-    if (c->buffer_index > MAX_INPUT - 1) {
-        c->buffer_index = 0;
-    }
-    return c->buffer_index;
-}
-
 int add_buffer_to_client(ClientT *c, char *buffer) {
-    int i = get_buffer_index(c);
+    int i = c->index_write;
     memcpy(c->buffer[i], buffer, strlen(buffer) - 2);
+    c->index_write++;
     return i;
 }
 
 char *get_next_buffer(ClientT *c) {
-    int i = get_buffer_index(c);
-    char *buf = (char *) c->buffer[i];
-    if (strlen(buf) > 0) {
-        c->buffer_index++;
+    if (c->index_write == 0) {
+        return "";
     }
-    debug_printf("calling get_next_buffer with index: %d, new index: %d, buf: %s\n", i, c->buffer_index, buf);
-    return buf;
+    if (c->index_write > c->index_read) {
+        int i = c->index_read;
+        char *buf = (char *) c->buffer[i];
+        c->index_read++;
+        return buf;
+    }
+    reset_client_buffer(c);
+    return "";
 }
 
 int send_to_client(ClientT *c, char *buffer) {
