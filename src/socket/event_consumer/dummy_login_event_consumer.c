@@ -8,7 +8,7 @@ void dummy_login_event_consumer(GameServiceT *game_service, Event *event) {
     debug_printf("dummy login event consumer for client %d", event->client->socket);
     uuid_t uuid;
     uuid_generate_random(uuid);
-    Mob *mob = create_mob(0, uuid,  "dummy");
+    Mob *mob = create_mob(0, uuid,  "dummy", "canonical_id");
     event->client->mob = mob;
     event->mob = mob;
     Room *room = get_room(game_service->room_table, 1431);

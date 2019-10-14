@@ -6,7 +6,8 @@ Mob *create_test_mob() {
     Mob *mob = create_mob(
             mob_fixture_id,
             uuid,
-            "test mob");
+            "test mob",
+            "canonical_id");
     mob_fixture_id++;
     return mob;
 }

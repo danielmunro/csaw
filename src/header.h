@@ -35,8 +35,9 @@ LocationTableT *get_location_table(GameServiceT *game_service);
 /**
  * Mobs
  */
+typedef struct MobReset MobResetT;
 typedef struct Mob MobT;
-MobT *create_mob(int id, uuid_t uuid, char *name);
+MobT *create_mob(int id, uuid_t uuid, char *name, char *canonical_id);
 ClientT *get_client_from_mob(GameServiceT *game_service, MobT *mob); // game service
 MobT *get_mob_by_id(GameServiceT *game_service, int id); // game service
 
