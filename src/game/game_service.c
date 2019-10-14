@@ -1,3 +1,5 @@
+#define LOOP_DELAY_USEC 10000
+
 enum GameServiceStatus { Initialized = 1, Running = 2, Stopped = 3 };
 
 typedef struct GameService {
@@ -107,6 +109,7 @@ void start_game_service(GameServiceT *g) {
         if (elapsed_seconds > 0) {
             dispatch_pulse_event(g);
         }
+        usleep(LOOP_DELAY_USEC);
     }
 }
 
