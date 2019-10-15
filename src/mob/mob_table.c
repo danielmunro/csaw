@@ -10,3 +10,14 @@ MobTable *create_mob_table() {
     PQclear(res);
     return mob_table;
 }
+
+int count_mob_instances(MobTable *mob_table, Mob *mob) {
+    int quantity = 0;
+    for (int i = 0; i < MAX_MOBS; i++) {
+        if (mob_table->mobs[i] &&
+            mob_table->mobs[i]->canonical_id == mob->canonical_id) {
+            quantity++;
+        }
+    }
+    return quantity;
+}

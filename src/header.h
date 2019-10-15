@@ -40,6 +40,7 @@ typedef struct Mob MobT;
 MobT *create_mob(int id, uuid_t uuid, char *name, char *canonical_id);
 ClientT *get_client_from_mob(GameServiceT *game_service, MobT *mob); // game service
 MobT *get_mob_by_id(GameServiceT *game_service, int id); // game service
+int count_mobs_in_room_by_mob(LocationTableT *location_table, MobT *mob); // location table
 
 typedef struct MobResetTable MobResetTableT;
 
