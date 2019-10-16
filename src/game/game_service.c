@@ -103,6 +103,7 @@ void check_client_buffers(GameServiceT *g) {
     ClientReadBuffers *bufs = read_client_buffers(g->server);
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (bufs->buffers[i]) {
+            debug_printf("buffer found for client %d: %s\n", bufs->buffers[i]->client->socket, bufs->buffers[i]->buffer);
             Event *event = create_client_input_event(
                     bufs->buffers[i]->client, bufs->buffers[i]->buffer);
             dispatch_event(g, event);

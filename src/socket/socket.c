@@ -151,6 +151,7 @@ ClientReadBuffers *read_client_buffers(Server *s) {
         if (s->clients[i] && s->clients[i]->delay == 0) {
             char *buffer = get_next_buffer(s->clients[i]);
             if (buffer && strlen(buffer) > 0) {
+                debug_printf("add to client_read_buffers: %s\n", buffer);
                 bufs->buffers[read_buf_index] = create_client_buffer(s->clients[i], buffer);
                 read_buf_index++;
             }
