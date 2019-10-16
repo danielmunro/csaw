@@ -30,7 +30,7 @@ ServerT *get_server(GameServiceT *game_service);
  * Location Table
  */
 typedef struct LocationTable LocationTableT;
-LocationTableT *get_location_table(GameServiceT *game_service);
+LocationTableT *get_location_table(GameServiceT *game_service); // game service
 
 /**
  * Mobs
@@ -39,14 +39,14 @@ typedef struct MobReset MobResetT;
 typedef struct Mob MobT;
 MobT *create_mob(int id, uuid_t uuid, char *name, char *canonical_id);
 ClientT *get_client_from_mob(GameServiceT *game_service, MobT *mob); // game service
-MobT *get_mob_by_id(GameServiceT *game_service, int id); // game service
-int count_mobs_in_room_by_mob(LocationTableT *location_table, MobT *mob); // location table
+MobT *get_mob_template_by_id(GameServiceT *game_service, int id); // game service
 
 typedef struct MobResetTable MobResetTableT;
 
 typedef struct MobTable MobTableT;
 MobTableT *hydrate_mob_table(PGresult *result);
-MobResetTableT *hydrate_mob_reset_table(GameServiceT *game_service, PGresult *result);
+MobResetTableT *hydrate_mob_reset_table(GameServiceT *game_service, MobResetTableT *table, PGresult *result);
+MobTableT *get_mob_table(GameServiceT *game_service);
 
 /**
  * Rooms
@@ -54,6 +54,9 @@ MobResetTableT *hydrate_mob_reset_table(GameServiceT *game_service, PGresult *re
 typedef struct Room RoomT;
 int get_room_id(RoomT *room);
 RoomT *get_room_by_id(GameServiceT *game_service, int id); // game service
+MobT *get_mob_by_room_and_index(LocationTableT *location_table, RoomT *room, int i); // location table
+void add_mob_location(LocationTableT *location_table, MobT *mob, RoomT *room);
+int count_mobs_in_room_by_mob(LocationTableT *location_table, RoomT *room, MobT *mob); // location table
 
 /**
  * Room Table
@@ -79,6 +82,7 @@ EventConsumerT *create_input_to_action_event_consumer();
 EventConsumerT *create_dummy_login_event_consumer();
 EventConsumerT *create_pulse_to_tick_event_consumer();
 EventConsumerT *create_increment_ticks_event_consumer();
+EventConsumerT *create_reset_mobs_event_consumer();
 
 #include "log/log_utility.c"
 #include "room/direction.c"

@@ -52,13 +52,17 @@ void move_mob(LocationTable *location_table, Mob *mob, RoomT *room, enum Directi
     }
 }
 
-int count_mobs_in_room_by_mob(LocationTable *location_table, Mob *mob) {
+int count_mobs_in_room_by_mob(LocationTable *location_table, Room *room, Mob *mob) {
     int in_room = 0;
     for (int i = 0; i < MAX_MOBS_PER_ROOM; i++) {
-        if (location_table->rooms[mob->room->id][i] &&
-            location_table->rooms[mob->room->id][i]->canonical_id == mob->canonical_id) {
+        if (location_table->rooms[room->id][i] &&
+            location_table->rooms[room->id][i]->canonical_id == mob->canonical_id) {
             in_room++;
         }
     }
     return in_room;
+}
+
+Mob *get_mob_by_room_and_index(LocationTable *location_table, Room *room, int i) {
+    return location_table->rooms[room->id][i];
 }

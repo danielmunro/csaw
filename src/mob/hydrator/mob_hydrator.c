@@ -10,9 +10,9 @@ Mob *hydrate_mob(PGresult *result, int row) {
 
 MobTable *hydrate_mob_table(PGresult *result) {
     int rows = PQntuples(result);
-    MobTable *mobTable = malloc(sizeof(MobTable));
+    MobTable *mob_table = create_mob_table();
     for(int i = 0; i < rows; i++) {
-        mobTable->mobs[i] = hydrate_mob(result, i);
+        mob_table->mobs[i] = hydrate_mob(result, i);
     }
-    return mobTable;
+    return mob_table;
 }

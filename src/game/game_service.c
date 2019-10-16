@@ -6,6 +6,7 @@ typedef struct GameService {
     Server *server;
     EventDispatcher *event_dispatcher;
     ActionTable *action_table;
+    MobTable *mob_template_table;
     MobTable *mob_table;
     RoomTable *room_table;
     LocationTable *location_table;
@@ -19,10 +20,11 @@ GameServiceT *create_game_service() {
     g->server = create_server();
     g->event_dispatcher = create_event_dispatcher();
     g->action_table = create_action_table();
+    g->mob_template_table = create_mob_template_table();
     g->mob_table = create_mob_table();
     g->room_table = create_room_table();
     g->location_table = create_location_table();
-    g->mob_reset_table = create_mob_reset_table(g);
+    g->mob_reset_table = create_hydrated_mob_reset_table(g);
     g->time_service = create_time_service();
     g->status = Initialized;
     return g;
@@ -33,10 +35,27 @@ void register_event_consumers(EventDispatcher *event_dispatcher) {
     event_dispatcher->consumers[1] = create_dummy_login_event_consumer();
     event_dispatcher->consumers[2] = create_pulse_to_tick_event_consumer();
     event_dispatcher->consumers[3] = create_increment_ticks_event_consumer();
+    event_dispatcher->consumers[4] = create_reset_mobs_event_consumer();
+}
+
+void reset_mobs(GameService *game_service) {
+    debug_puts("reset_mobs running");
+    for (int i = 0; i < MAX_MOB_RESETS; i++) {
+        debug_printf("index %d\n", i);
+        if (!game_service->mob_reset_table->resets[i]) {
+            return;
+        }
+        do_mob_reset(game_service, game_service->mob_reset_table->resets[i]);
+    }
+    debug_puts("reset_mobs done");
 }
 
 LocationTable *get_location_table(GameServiceT *game_service) {
     return game_service->location_table;
+}
+
+MobTable *get_mob_table(GameServiceT *game_service) {
+    return game_service->mob_table;
 }
 
 Server *get_server(GameServiceT *game_service) {
@@ -121,10 +140,10 @@ void client_send_to_clients(GameServiceT *g, ClientT *c, char *buffer) {
     }
 }
 
-Mob *get_mob_by_id(GameServiceT *g, int id) {
+Mob *get_mob_template_by_id(GameServiceT *game_service, int id) {
     for (int i = 0 ; i < MAX_MOBS; i++) {
-        if (g->mob_table->mobs[i] && g->mob_table->mobs[i]->id == id) {
-            return g->mob_table->mobs[i];
+        if (game_service->mob_template_table->mobs[i] && game_service->mob_template_table->mobs[i]->id == id) {
+            return game_service->mob_template_table->mobs[i];
         }
     }
     return NULL;

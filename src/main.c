@@ -6,6 +6,7 @@ void listen_csaw() {
     GameServiceT *game_service = create_game_service();
     open_main_socket(game_service->server);
     register_event_consumers(game_service->event_dispatcher);
+    reset_mobs(game_service);
     start_game_service(game_service);
 }
 
