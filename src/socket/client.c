@@ -30,6 +30,7 @@ ClientT *new_client(struct sockaddr_in address, int socket) {
 
 int add_buffer_to_client(ClientT *c, char *buffer) {
     int i = c->index_write;
+    memset(c->buffer[i], 0, MAX_INPUT_LENGTH);
     memcpy(c->buffer[i], buffer, strlen(buffer) - 2);
     c->index_write++;
     return i;
