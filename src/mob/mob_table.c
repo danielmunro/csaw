@@ -1,4 +1,4 @@
-#define MAX_MOBS 10000
+#define MAX_MOBS 20000
 
 typedef struct MobTable {
     Mob *mobs[MAX_MOBS];
