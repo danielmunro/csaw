@@ -27,6 +27,14 @@ ActionT *get_action(GameServiceT *game_service, char *name_partial);
 ServerT *get_server(GameServiceT *game_service);
 
 /**
+ * Object Description
+ */
+typedef struct ObjectDescription ObjectDescriptionT;
+ObjectDescriptionT *create_object_description(char *name, char *brief, char *description);
+char *get_object_name(ObjectDescriptionT *o);
+char *get_object_brief(ObjectDescriptionT *o);
+
+/**
  * Location Table
  */
 typedef struct LocationTable LocationTableT;
@@ -37,7 +45,7 @@ LocationTableT *get_location_table(GameServiceT *game_service); // game service
  */
 typedef struct MobReset MobResetT;
 typedef struct Mob MobT;
-MobT *create_mob(int id, uuid_t uuid, char *name, char *canonical_id);
+MobT *create_mob(int id, uuid_t uuid, ObjectDescriptionT *object_description, char *canonical_id);
 ClientT *get_client_from_mob(GameServiceT *game_service, MobT *mob); // game service
 MobT *get_mob_template_by_id(GameServiceT *game_service, int id); // game service
 
@@ -73,7 +81,7 @@ void do_look_action(GameServiceT *game_service, RequestT *request);
 /**
  * Events
  */
- typedef struct EventConsumer EventConsumerT;
+typedef struct EventConsumer EventConsumerT;
 typedef struct Event EventT;
 void dispatch_event(GameServiceT *game_service, EventT *event);
 EventT *create_login_event(ClientT *client);

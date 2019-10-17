@@ -4,8 +4,11 @@ Mob *hydrate_mob(PGresult *result, int row) {
     return create_mob(
             int_from_result(result, row, 0),
             uuid,
-            PQgetvalue(result, row, 2),
-            PQgetvalue(result, row, 3));
+            create_object_description(
+                    PQgetvalue(result, row, 2),
+                    PQgetvalue(result, row, 3),
+                    PQgetvalue(result, row, 4)),
+            PQgetvalue(result, row, 5));
 }
 
 MobTable *hydrate_mob_table(PGresult *result) {

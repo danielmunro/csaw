@@ -4,7 +4,7 @@ void test_look_describes_room() {
     ClientT *c = create_client(g->server, TEST_SOCKET);
     c->mob = create_test_mob();
     create_test_area(g);
-    char *out = room_to_string(g->room_table->rooms[0], g->location_table);
+    char *out = room_to_string(g->room_table->rooms[0], c->mob, g->location_table);
 
     // given
     add_mob_location(g->location_table, c->mob, g->room_table->rooms[0]);
@@ -83,6 +83,6 @@ void test_moving_sends_a_room_description_to_mob() {
 
     // then
     MessageCollection *m = get_mock_message_collection();
-    char *out = room_to_string(g->room_table->rooms[1], g->location_table);
+    char *out = room_to_string(g->room_table->rooms[1], c->mob, g->location_table);
     assert(strncmp(m->messages[0]->buffer, out, strlen(out)) == 0);
 }

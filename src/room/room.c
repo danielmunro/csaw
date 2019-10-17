@@ -23,7 +23,7 @@ int get_room_id(Room *room) {
     return room->id;
 }
 
-char *room_to_string(Room *room, LocationTableT *location_table) {
+char *room_to_string(Room *room, Mob *mob, LocationTableT *location_table) {
     char *out = (char *) malloc(ROOM_DESCRIPTION_MAX_LENGTH * sizeof(char));
     sprintf(out, "%s\nExits [", room->name);
     for (int j = 0; j < MAX_EXITS; j++) {
@@ -33,10 +33,10 @@ char *room_to_string(Room *room, LocationTableT *location_table) {
     }
     strcat(out, "]\n");
     for (int i = 0; i < MAX_MOBS_PER_ROOM; i++) {
-        Mob *mob = get_mob_by_room_and_index(location_table, room, i);
-        if (mob) {
-            strcat(out, mob->name);
-            strcat(out, " is here.\n");
+        Mob *m = get_mob_by_room_and_index(location_table, room, i);
+        if (m && m != mob) {
+            strcat(out, get_object_brief(m->description));
+            strcat(out, "\n");
         }
     }
     return out;
