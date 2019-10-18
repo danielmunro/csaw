@@ -85,6 +85,7 @@ typedef struct EventConsumer EventConsumerT;
 typedef struct Event EventT;
 void dispatch_event(GameServiceT *game_service, EventT *event);
 EventT *create_login_event(ClientT *client);
+EventT *create_client_input_event(ClientT *client, char *buffer);
 
 EventConsumerT *create_input_to_action_event_consumer();
 EventConsumerT *create_dummy_login_event_consumer();

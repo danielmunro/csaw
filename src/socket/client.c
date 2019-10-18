@@ -8,6 +8,7 @@ struct Client {
     int index_write;
     int index_read;
     int delay;
+    char *last_buffer;
     Mob *mob;
 };
 
@@ -25,6 +26,7 @@ ClientT *new_client(struct sockaddr_in address, int socket) {
     c->socket = socket;
     c->delay = 0;
     reset_client_buffer(c);
+    c->last_buffer = "";
     return c;
 }
 
