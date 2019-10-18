@@ -52,6 +52,20 @@ char *get_next_buffer(ClientT *c) {
     return NULL;
 }
 
+char *get_next_input(ClientT *c) {
+    char *buffer = get_next_buffer(c);
+    if (buffer && strlen(buffer) > 0) {
+        if (strcmp(buffer, "!") == 0) {
+            return c->last_buffer;
+        } else {
+            c->last_buffer = malloc(strlen(buffer));
+            strcpy(c->last_buffer, buffer);
+            return buffer;
+        }
+    }
+    return NULL;
+}
+
 int send_to_client(ClientT *c, char *buffer) {
     int bytes_sent = send(c->socket, buffer, strlen(buffer), 0);
     if (bytes_sent != strlen(buffer)) {

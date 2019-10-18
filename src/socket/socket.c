@@ -144,24 +144,16 @@ void select_sockets(Server *s) {
     select(MAX_CLIENTS, &s->reading_fds, NULL, NULL, &tv);
 }
 
+
+
 ClientReadBuffers *read_client_buffers(Server *s) {
     ClientReadBuffers *bufs = create_client_read_buffers();
     int read_buf_index = 0;
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (s->clients[i] && s->clients[i]->delay == 0) {
-            char *buffer = get_next_buffer(s->clients[i]);
-            if (buffer && strlen(buffer) > 0) {
-                char *use_buf;
-                if (strcmp(buffer, "!") == 0) {
-                    use_buf = malloc(strlen(s->clients[i]->last_buffer));
-                    strcpy(use_buf, s->clients[i]->last_buffer);
-                } else {
-                    use_buf = malloc(strlen(buffer));
-                    strcpy(use_buf, buffer);
-                    s->clients[i]->last_buffer = malloc(strlen(buffer));
-                    strcpy(s->clients[i]->last_buffer, buffer);
-                }
-                bufs->buffers[read_buf_index] = create_client_buffer(s->clients[i], use_buf);
+            char *next_input = get_next_input(s->clients[i]);
+            if (next_input) {
+                bufs->buffers[read_buf_index] = create_client_buffer(s->clients[i], next_input);
                 read_buf_index++;
             }
         }
