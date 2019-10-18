@@ -1,5 +1,6 @@
 #define MAX_INPUT 10
 #define MAX_INPUT_LENGTH 1000
+const char *REPEATER = "!";
 
 struct Client {
     struct sockaddr_in address;
@@ -54,16 +55,15 @@ char *get_next_buffer(ClientT *c) {
 
 char *get_next_input(ClientT *c) {
     char *buffer = get_next_buffer(c);
-    if (buffer && strlen(buffer) > 0) {
-        if (strcmp(buffer, "!") == 0) {
-            return c->last_buffer;
-        } else {
-            c->last_buffer = malloc(strlen(buffer));
-            strcpy(c->last_buffer, buffer);
-            return buffer;
-        }
+    if (!buffer) {
+        return NULL;
     }
-    return NULL;
+    if (strcmp(buffer, REPEATER) == 0) {
+        return c->last_buffer;
+    }
+    c->last_buffer = malloc(strlen(buffer));
+    strcpy(c->last_buffer, buffer);
+    return buffer;
 }
 
 int send_to_client(ClientT *c, char *buffer) {
