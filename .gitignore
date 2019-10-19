@@ -56,3 +56,5 @@ CMakeFiles/
 Testing/
 CMakeCache.txt
 build/
+coverage.info
+test_main.gcno

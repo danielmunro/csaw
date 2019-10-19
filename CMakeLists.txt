@@ -12,13 +12,6 @@ add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
 
 enable_testing()
 
-function(add_test_suite test_name test_main)
-    add_executable(${test_name} ${test_main})
-    add_test(NAME ${test_name} COMMAND $<TARGET_FILE:${test_name}>)
-    target_link_libraries(${test_name} PRIVATE ${PostgreSQL_LIBRARIES})
-endfunction()
-
-add_test_suite(test_main tests/test_main.c)
-
-target_compile_options(test_main INTERFACE --coverage)
-target_link_libraries(test_main INTERFACE --coverage)
+add_executable(test_main tests/test_main.c)
+add_test(NAME test_main COMMAND $<TARGET_FILE:test_main>)
+target_link_libraries(test_main PRIVATE ${PostgreSQL_LIBRARIES})
