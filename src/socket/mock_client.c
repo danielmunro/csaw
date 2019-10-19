@@ -37,7 +37,6 @@ MessageCollection *get_mock_message_collection() {
 }
 
 void clear_mock_message_collection() {
-    free(_m);
     m_index = 0;
     initialized = 0;
 }

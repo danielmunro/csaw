@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.15.3/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.15.3/bin/cmake -E remove -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -56,27 +56,27 @@ CMAKE_BINARY_DIR = /Users/danmunro/github/csaw
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/Cellar/cmake/3.15.3/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target test
 test:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/local/Cellar/cmake/3.15.3/bin/ctest --force-new-ctest-process $(ARGS)
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/ctest --force-new-ctest-process $(ARGS)
 .PHONY : test
 
 # Special rule for the target test
 test/fast: test
 
 .PHONY : test/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # Special rule for the target edit_cache
 edit_cache:
@@ -122,69 +122,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named test_room
+# Target rules for targets named test_main
 
 # Build rule for target.
-test_room: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_room
-.PHONY : test_room
+test_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_main
+.PHONY : test_main
 
 # fast build rule for target.
-test_room/fast:
-	$(MAKE) -f CMakeFiles/test_room.dir/build.make CMakeFiles/test_room.dir/build
-.PHONY : test_room/fast
-
-#=============================================================================
-# Target rules for targets named test_actions
-
-# Build rule for target.
-test_actions: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_actions
-.PHONY : test_actions
-
-# fast build rule for target.
-test_actions/fast:
-	$(MAKE) -f CMakeFiles/test_actions.dir/build.make CMakeFiles/test_actions.dir/build
-.PHONY : test_actions/fast
-
-#=============================================================================
-# Target rules for targets named test_socket
-
-# Build rule for target.
-test_socket: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_socket
-.PHONY : test_socket
-
-# fast build rule for target.
-test_socket/fast:
-	$(MAKE) -f CMakeFiles/test_socket.dir/build.make CMakeFiles/test_socket.dir/build
-.PHONY : test_socket/fast
-
-#=============================================================================
-# Target rules for targets named test_game_service
-
-# Build rule for target.
-test_game_service: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_game_service
-.PHONY : test_game_service
-
-# fast build rule for target.
-test_game_service/fast:
-	$(MAKE) -f CMakeFiles/test_game_service.dir/build.make CMakeFiles/test_game_service.dir/build
-.PHONY : test_game_service/fast
-
-#=============================================================================
-# Target rules for targets named test_client
-
-# Build rule for target.
-test_client: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_client
-.PHONY : test_client
-
-# fast build rule for target.
-test_client/fast:
-	$(MAKE) -f CMakeFiles/test_client.dir/build.make CMakeFiles/test_client.dir/build
-.PHONY : test_client/fast
+test_main/fast:
+	$(MAKE) -f CMakeFiles/test_main.dir/build.make CMakeFiles/test_main.dir/build
+.PHONY : test_main/fast
 
 #=============================================================================
 # Target rules for targets named csaw
@@ -226,140 +174,32 @@ src/main.c.s:
 	$(MAKE) -f CMakeFiles/csaw.dir/build.make CMakeFiles/csaw.dir/src/main.c.s
 .PHONY : src/main.c.s
 
-tests/test_actions_main.o: tests/test_actions_main.c.o
+tests/test_main.o: tests/test_main.c.o
 
-.PHONY : tests/test_actions_main.o
-
-# target to build an object file
-tests/test_actions_main.c.o:
-	$(MAKE) -f CMakeFiles/test_actions.dir/build.make CMakeFiles/test_actions.dir/tests/test_actions_main.c.o
-.PHONY : tests/test_actions_main.c.o
-
-tests/test_actions_main.i: tests/test_actions_main.c.i
-
-.PHONY : tests/test_actions_main.i
-
-# target to preprocess a source file
-tests/test_actions_main.c.i:
-	$(MAKE) -f CMakeFiles/test_actions.dir/build.make CMakeFiles/test_actions.dir/tests/test_actions_main.c.i
-.PHONY : tests/test_actions_main.c.i
-
-tests/test_actions_main.s: tests/test_actions_main.c.s
-
-.PHONY : tests/test_actions_main.s
-
-# target to generate assembly for a file
-tests/test_actions_main.c.s:
-	$(MAKE) -f CMakeFiles/test_actions.dir/build.make CMakeFiles/test_actions.dir/tests/test_actions_main.c.s
-.PHONY : tests/test_actions_main.c.s
-
-tests/test_client_main.o: tests/test_client_main.c.o
-
-.PHONY : tests/test_client_main.o
+.PHONY : tests/test_main.o
 
 # target to build an object file
-tests/test_client_main.c.o:
-	$(MAKE) -f CMakeFiles/test_client.dir/build.make CMakeFiles/test_client.dir/tests/test_client_main.c.o
-.PHONY : tests/test_client_main.c.o
+tests/test_main.c.o:
+	$(MAKE) -f CMakeFiles/test_main.dir/build.make CMakeFiles/test_main.dir/tests/test_main.c.o
+.PHONY : tests/test_main.c.o
 
-tests/test_client_main.i: tests/test_client_main.c.i
+tests/test_main.i: tests/test_main.c.i
 
-.PHONY : tests/test_client_main.i
-
-# target to preprocess a source file
-tests/test_client_main.c.i:
-	$(MAKE) -f CMakeFiles/test_client.dir/build.make CMakeFiles/test_client.dir/tests/test_client_main.c.i
-.PHONY : tests/test_client_main.c.i
-
-tests/test_client_main.s: tests/test_client_main.c.s
-
-.PHONY : tests/test_client_main.s
-
-# target to generate assembly for a file
-tests/test_client_main.c.s:
-	$(MAKE) -f CMakeFiles/test_client.dir/build.make CMakeFiles/test_client.dir/tests/test_client_main.c.s
-.PHONY : tests/test_client_main.c.s
-
-tests/test_game_service_main.o: tests/test_game_service_main.c.o
-
-.PHONY : tests/test_game_service_main.o
-
-# target to build an object file
-tests/test_game_service_main.c.o:
-	$(MAKE) -f CMakeFiles/test_game_service.dir/build.make CMakeFiles/test_game_service.dir/tests/test_game_service_main.c.o
-.PHONY : tests/test_game_service_main.c.o
-
-tests/test_game_service_main.i: tests/test_game_service_main.c.i
-
-.PHONY : tests/test_game_service_main.i
+.PHONY : tests/test_main.i
 
 # target to preprocess a source file
-tests/test_game_service_main.c.i:
-	$(MAKE) -f CMakeFiles/test_game_service.dir/build.make CMakeFiles/test_game_service.dir/tests/test_game_service_main.c.i
-.PHONY : tests/test_game_service_main.c.i
+tests/test_main.c.i:
+	$(MAKE) -f CMakeFiles/test_main.dir/build.make CMakeFiles/test_main.dir/tests/test_main.c.i
+.PHONY : tests/test_main.c.i
 
-tests/test_game_service_main.s: tests/test_game_service_main.c.s
+tests/test_main.s: tests/test_main.c.s
 
-.PHONY : tests/test_game_service_main.s
-
-# target to generate assembly for a file
-tests/test_game_service_main.c.s:
-	$(MAKE) -f CMakeFiles/test_game_service.dir/build.make CMakeFiles/test_game_service.dir/tests/test_game_service_main.c.s
-.PHONY : tests/test_game_service_main.c.s
-
-tests/test_room_main.o: tests/test_room_main.c.o
-
-.PHONY : tests/test_room_main.o
-
-# target to build an object file
-tests/test_room_main.c.o:
-	$(MAKE) -f CMakeFiles/test_room.dir/build.make CMakeFiles/test_room.dir/tests/test_room_main.c.o
-.PHONY : tests/test_room_main.c.o
-
-tests/test_room_main.i: tests/test_room_main.c.i
-
-.PHONY : tests/test_room_main.i
-
-# target to preprocess a source file
-tests/test_room_main.c.i:
-	$(MAKE) -f CMakeFiles/test_room.dir/build.make CMakeFiles/test_room.dir/tests/test_room_main.c.i
-.PHONY : tests/test_room_main.c.i
-
-tests/test_room_main.s: tests/test_room_main.c.s
-
-.PHONY : tests/test_room_main.s
+.PHONY : tests/test_main.s
 
 # target to generate assembly for a file
-tests/test_room_main.c.s:
-	$(MAKE) -f CMakeFiles/test_room.dir/build.make CMakeFiles/test_room.dir/tests/test_room_main.c.s
-.PHONY : tests/test_room_main.c.s
-
-tests/test_socket_main.o: tests/test_socket_main.c.o
-
-.PHONY : tests/test_socket_main.o
-
-# target to build an object file
-tests/test_socket_main.c.o:
-	$(MAKE) -f CMakeFiles/test_socket.dir/build.make CMakeFiles/test_socket.dir/tests/test_socket_main.c.o
-.PHONY : tests/test_socket_main.c.o
-
-tests/test_socket_main.i: tests/test_socket_main.c.i
-
-.PHONY : tests/test_socket_main.i
-
-# target to preprocess a source file
-tests/test_socket_main.c.i:
-	$(MAKE) -f CMakeFiles/test_socket.dir/build.make CMakeFiles/test_socket.dir/tests/test_socket_main.c.i
-.PHONY : tests/test_socket_main.c.i
-
-tests/test_socket_main.s: tests/test_socket_main.c.s
-
-.PHONY : tests/test_socket_main.s
-
-# target to generate assembly for a file
-tests/test_socket_main.c.s:
-	$(MAKE) -f CMakeFiles/test_socket.dir/build.make CMakeFiles/test_socket.dir/tests/test_socket_main.c.s
-.PHONY : tests/test_socket_main.c.s
+tests/test_main.c.s:
+	$(MAKE) -f CMakeFiles/test_main.dir/build.make CMakeFiles/test_main.dir/tests/test_main.c.s
+.PHONY : tests/test_main.c.s
 
 # Help Target
 help:
@@ -367,33 +207,17 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... rebuild_cache"
-	@echo "... test_room"
-	@echo "... test_actions"
 	@echo "... test"
-	@echo "... test_socket"
-	@echo "... test_game_service"
+	@echo "... test_main"
+	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... test_client"
 	@echo "... csaw"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... tests/test_actions_main.o"
-	@echo "... tests/test_actions_main.i"
-	@echo "... tests/test_actions_main.s"
-	@echo "... tests/test_client_main.o"
-	@echo "... tests/test_client_main.i"
-	@echo "... tests/test_client_main.s"
-	@echo "... tests/test_game_service_main.o"
-	@echo "... tests/test_game_service_main.i"
-	@echo "... tests/test_game_service_main.s"
-	@echo "... tests/test_room_main.o"
-	@echo "... tests/test_room_main.i"
-	@echo "... tests/test_room_main.s"
-	@echo "... tests/test_socket_main.o"
-	@echo "... tests/test_socket_main.i"
-	@echo "... tests/test_socket_main.s"
+	@echo "... tests/test_main.o"
+	@echo "... tests/test_main.i"
+	@echo "... tests/test_main.s"
 .PHONY : help
 
 
