@@ -1,35 +1,58 @@
+#define DIRECTION_COUNT 6
+
 enum Direction { NorthDirection, SouthDirection, EastDirection, WestDirection, UpDirection, DownDirection, NullDirection };
 
+char *NORTH = "north";
+char *SOUTH = "south";
+char *EAST = "east";
+char *WEST = "west";
+char *UP = "up";
+char *DOWN = "down";
+char *BAD_DIRECTION = "";
+
+typedef struct DirectionMap {
+    enum Direction enum_direction;
+    char *direction;
+} DirectionMap;
+
+typedef struct Directions {
+    DirectionMap *map[DIRECTION_COUNT];
+} Directions;
+
+DirectionMap *create_direction_map(enum Direction enum_direction, char *direction) {
+    DirectionMap *map = malloc(sizeof(DirectionMap));
+    map->enum_direction = enum_direction;
+    map->direction = direction;
+    return map;
+}
+
+Directions *create_directions() {
+    Directions *directions = malloc(sizeof(Directions));
+    directions->map[0] = create_direction_map(NorthDirection, NORTH);
+    directions->map[1] = create_direction_map(SouthDirection, SOUTH);
+    directions->map[2] = create_direction_map(EastDirection, EAST);
+    directions->map[3] = create_direction_map(WestDirection, WEST);
+    directions->map[4] = create_direction_map(UpDirection, UP);
+    directions->map[5] = create_direction_map(DownDirection, DOWN);
+    return directions;
+}
+
 enum Direction get_direction_from_string(char *direction) {
-    if (strcmp(direction, "north") == 0) {
-        return NorthDirection;
-    } else if (strcmp(direction, "south") == 0) {
-        return SouthDirection;
-    } else if (strcmp(direction, "east") == 0) {
-        return EastDirection;
-    } else if (strcmp(direction, "west") == 0) {
-        return WestDirection;
-    } else if (strcmp(direction, "up") == 0) {
-        return UpDirection;
-    } else if (strcmp(direction, "down") == 0) {
-        return DownDirection;
+    Directions *dir = create_directions();
+    for (int i = 0; i < DIRECTION_COUNT; i++) {
+        if (strcmp(dir->map[i]->direction, direction) == 0) {
+            return dir->map[i]->enum_direction;
+        }
     }
     return NullDirection;
 }
 
 char *get_string_from_direction(enum Direction direction) {
-    if (direction == NorthDirection) {
-        return "north";
-    } else if (direction == SouthDirection) {
-        return "south";
-    } else if (direction == EastDirection) {
-        return "east";
-    } else if (direction == WestDirection) {
-        return "west";
-    } else if (direction == UpDirection) {
-        return "up";
-    } else if (direction == DownDirection) {
-        return "down";
+    Directions *dir = create_directions();
+    for (int i = 0; i < DIRECTION_COUNT; i++) {
+        if (dir->map[i]->enum_direction == direction) {
+            return dir->map[i]->direction;
+        }
     }
-    return "";
+    return BAD_DIRECTION;
 }
