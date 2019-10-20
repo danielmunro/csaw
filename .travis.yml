@@ -11,3 +11,5 @@ env:
     - PG=9.6
     - PG=10
     - PG=11
+before_install:
+  - sudo apt-get install libpq-dev
