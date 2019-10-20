@@ -2,24 +2,24 @@
 
 enum Direction { NorthDirection, SouthDirection, EastDirection, WestDirection, UpDirection, DownDirection, NullDirection };
 
-char *NORTH = "north";
-char *SOUTH = "south";
-char *EAST = "east";
-char *WEST = "west";
-char *UP = "up";
-char *DOWN = "down";
-char *BAD_DIRECTION = "";
+const char *NORTH = "north";
+const char *SOUTH = "south";
+const char *EAST = "east";
+const char *WEST = "west";
+const char *UP = "up";
+const char *DOWN = "down";
+const char *BAD_DIRECTION = "";
 
 typedef struct DirectionMap {
     enum Direction enum_direction;
-    char *direction;
+    const char *direction;
 } DirectionMap;
 
 typedef struct Directions {
     DirectionMap *map[DIRECTION_COUNT];
 } Directions;
 
-DirectionMap *create_direction_map(enum Direction enum_direction, char *direction) {
+DirectionMap *create_direction_map(enum Direction enum_direction, const char *direction) {
     DirectionMap *map = malloc(sizeof(DirectionMap));
     map->enum_direction = enum_direction;
     map->direction = direction;
@@ -37,17 +37,17 @@ Directions *create_directions() {
     return directions;
 }
 
-enum Direction get_direction_from_string(char *direction) {
+enum Direction get_direction_from_string(const char *direction) {
     Directions *dir = create_directions();
     for (int i = 0; i < DIRECTION_COUNT; i++) {
-        if (strcmp(dir->map[i]->direction, direction) == 0) {
+        if (strncmp(dir->map[i]->direction, direction, strlen(direction)) == 0) {
             return dir->map[i]->enum_direction;
         }
     }
     return NullDirection;
 }
 
-char *get_string_from_direction(enum Direction direction) {
+const char *get_string_from_direction(enum Direction direction) {
     Directions *dir = create_directions();
     for (int i = 0; i < DIRECTION_COUNT; i++) {
         if (dir->map[i]->enum_direction == direction) {

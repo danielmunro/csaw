@@ -38,6 +38,8 @@ void run_game_service_tests() {
 void run_room_tests() {
     void (*tests[MAX_TESTS])() = {
             test_room_to_string,
+            test_direction_enum_sanity_checks,
+            test_direction_string_sanity_checks,
     };
     TestSuite *ts = create_test_suite(tests);
     run_tests(ts);
