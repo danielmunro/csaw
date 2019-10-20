@@ -15,7 +15,7 @@ struct Client {
 
 void reset_client_buffer(ClientT *client) {
     for (int i = 0; i < MAX_INPUT; i++) {
-        memcpy(client->buffer[i], NULL, 0);
+        memcpy(client->buffer[i], 0, 0);
     }
     client->index_write = 0;
     client->index_read = 0;
