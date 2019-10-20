@@ -14,6 +14,7 @@ void dummy_login_event_consumer(GameServiceT *game_service, Event *event) {
     event->client->mob = mob;
     event->mob = mob;
     Room *room = get_room(game_service->room_table, START_ROOM_ID);
+    add_to_mob_table(game_service->mob_table, mob);
     add_mob_location(
             game_service->location_table,
             mob,

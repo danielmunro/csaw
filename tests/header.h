@@ -2,6 +2,7 @@
 #include "../src/header.h"
 #include "../src/test/test_fixtures.c"
 #include "../src/test/test_suite.c"
+#include "socket/event_consumer/test_dummy_login_event_consumer.c"
 #include "socket/test_socket.c"
 #include "socket/test_client.c"
 #include "event/test_event_dispatcher.c"

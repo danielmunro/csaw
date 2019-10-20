@@ -50,6 +50,7 @@ void run_socket_tests() {
             test_new_connection_creates_client,
             test_end_client_session_removes_client_from_server,
             test_read_socket_adds_to_client_buffer,
+            test_dummy_login_adds_mob_to_start_room,
     };
     TestSuite *ts = create_test_suite(tests);
     run_tests(ts);
