@@ -1,7 +1,7 @@
 dist: bionic
 language: c
 compiler: gcc
-script: cmake . && make && make test
+script: make && make test-coverage
 env:
   matrix:
     - PG=9.3
