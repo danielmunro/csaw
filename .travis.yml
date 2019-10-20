@@ -1,6 +1,7 @@
 dist: bionic
 language: c
 compiler: gcc
+services: postgresql
 script: make && make test-coverage
 env:
   matrix:
@@ -10,10 +11,3 @@ env:
     - PG=9.6
     - PG=10
     - PG=11
-
-before_install:
-  - sudo apt-get install libpq-dev
-
-before_script:
-  - sudo -u postgres createuser -s "$USER"
-  - sudo -u postgres createuser -s root
