@@ -1,13 +1,9 @@
 .PHONY: clean
-all:
-	gcc -I/usr/local/opt/libpq/include -lpq src/main.c -o build/main
-
-.PHONY: clean
 clean:
 	rm -f build/* coverage.info test_main.gcda test_main.gcno
 
 .PHONY: test
-test:
+test: clean
 	gcc -I/usr/local/opt/libpq/include -lpq -ftest-coverage -fprofile-arcs tests/test_main.c -o build/main_test; \
 	build/main_test;
 
@@ -17,4 +13,4 @@ coverage:
 	lcov --list coverage.info;
 
 .PHONY: test-coverage
-test-coverage: test coverage
+test-coverage: clean test coverage

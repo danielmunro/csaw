@@ -1,16 +1,14 @@
 void test_look_describes_room() {
     // setup
-    GameServiceT *g = create_game_service();
-    ClientT *c = create_client(g->server, TEST_SOCKET);
-    c->mob = create_test_mob();
-    create_test_area(g);
-    char *out = room_to_string(g->room_table->rooms[0], c->mob, g->location_table);
+    GameServiceT *g = create_game_service_with_test_area();
+    Mob *mob = create_test_mob();
+    char *out = room_to_string(g->room_table->rooms[0], mob, g->location_table);
 
     // given
-    add_mob_location(g->location_table, c->mob, g->room_table->rooms[0]);
+    add_mob_location(g->location_table, mob, g->room_table->rooms[0]);
 
     // when
-    do_look_action(g, create_request(Look, c->mob, "look"));
+    do_look_action(g, create_request(Look, mob, "look"));
 
     // then
     MessageCollection *m = get_mock_message_collection();
@@ -19,36 +17,92 @@ void test_look_describes_room() {
 
 void test_mob_moves_north() {
     // setup
-    GameServiceT *g = create_game_service();
-    ClientT *c = create_client(g->server, TEST_SOCKET);
-    c->mob = create_test_mob();
-    create_test_area(g);
+    GameServiceT *g = create_game_service_with_test_area();
+    Mob *mob = create_test_mob();
 
     // given
-    add_mob_location(g->location_table, c->mob, g->room_table->rooms[0]);
+    add_mob_location(g->location_table, mob, g->room_table->rooms[0]);
 
     // when
-    do_north_action(g, create_request(North, c->mob, "north"));
+    do_north_action(g, create_request(North, mob, "north"));
 
     // then
-    assert(c->mob->room == g->room_table->rooms[1]);
+    assert(mob->room == g->room_table->rooms[1]);
 }
 
 void test_mob_moves_south() {
     // setup
-    GameServiceT *g = create_game_service();
-    ClientT *c = create_client(g->server, TEST_SOCKET);
-    c->mob = create_test_mob();
-    create_test_area(g);
+    GameServiceT *g = create_game_service_with_test_area();
+    Mob *mob = create_test_mob();
 
     // given
-    add_mob_location(g->location_table, c->mob, g->room_table->rooms[1]);
+    add_mob_location(g->location_table, mob, g->room_table->rooms[1]);
 
     // when
-    do_south_action(g, create_request(North, c->mob, "south"));
+    do_south_action(g, create_request(North, mob, "south"));
 
     // then
-    assert(c->mob->room == g->room_table->rooms[0]);
+    assert(mob->room == g->room_table->rooms[0]);
+}
+
+void test_mob_moves_east() {
+    // setup
+    GameServiceT *g = create_game_service_with_test_area();
+    Mob *mob = create_test_mob();
+
+    // given
+    add_mob_location(g->location_table, mob, g->room_table->rooms[0]);
+
+    // when
+    do_east_action(g, create_request(East, mob, "east"));
+
+    // then
+    assert(mob->room == g->room_table->rooms[2]);
+}
+
+void test_mob_moves_west() {
+    // setup
+    GameServiceT *g = create_game_service_with_test_area();
+    Mob *mob = create_test_mob();
+
+    // given
+    add_mob_location(g->location_table, mob, g->room_table->rooms[2]);
+
+    // when
+    do_west_action(g, create_request(West, mob, "west"));
+
+    // then
+    assert(mob->room == g->room_table->rooms[0]);
+}
+
+void test_mob_moves_up() {
+    // setup
+    GameServiceT *g = create_game_service_with_test_area();
+    Mob *mob = create_test_mob();
+
+    // given
+    add_mob_location(g->location_table, mob, g->room_table->rooms[0]);
+
+    // when
+    do_up_action(g, create_request(Up, mob, "up"));
+
+    // then
+    assert(mob->room == g->room_table->rooms[3]);
+}
+
+void test_mob_moves_down() {
+    // setup
+    GameServiceT *g = create_game_service_with_test_area();
+    Mob *mob = create_test_mob();
+
+    // given
+    add_mob_location(g->location_table, mob, g->room_table->rooms[3]);
+
+    // when
+    do_down_action(g, create_request(Down, mob, "down"));
+
+    // then
+    assert(mob->room == g->room_table->rooms[0]);
 }
 
 void test_invalid_move_does_nothing() {

@@ -6,6 +6,10 @@ void run_action_tests() {
             test_look_describes_room,
             test_mob_moves_north,
             test_mob_moves_south,
+            test_mob_moves_east,
+            test_mob_moves_west,
+            test_mob_moves_up,
+            test_mob_moves_down,
             test_invalid_move_does_nothing,
             test_moving_sends_a_room_description_to_mob,
     };

@@ -1,10 +1,5 @@
 void do_north_action(GameServiceT *game_service, Request *request) {
-    move_mob(
-            get_location_table(game_service),
-            request->mob,
-            request->mob->room,
-            NorthDirection);
-    do_look_action(game_service, request);
+    do_move_action(game_service, request, NorthDirection);
 }
 
 ActionT *create_north_action() {

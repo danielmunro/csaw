@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <uuid/uuid.h>
-//#include <libpq-fe.h>
-#include <postgresql/libpq-fe.h>
+#include <libpq-fe.h>
+//#include <postgresql/libpq-fe.h>
 #include <string.h>
 #include <stdarg.h>
 #include <time.h>
