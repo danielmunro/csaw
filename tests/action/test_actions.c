@@ -8,7 +8,7 @@ void test_look_describes_room() {
     add_mob_location(g->location_table, mob, g->room_table->rooms[0]);
 
     // when
-    do_look_action(g, create_request(Look, mob, "look"));
+    do_look_action(g, create_request(LookAction, mob, "look"));
 
     // then
     MessageCollection *m = get_mock_message_collection();
@@ -24,7 +24,7 @@ void test_mob_moves_north() {
     add_mob_location(g->location_table, mob, g->room_table->rooms[0]);
 
     // when
-    do_north_action(g, create_request(North, mob, "north"));
+    do_north_action(g, create_request(NorthAction, mob, "north"));
 
     // then
     assert(mob->room == g->room_table->rooms[1]);
@@ -39,7 +39,7 @@ void test_mob_moves_south() {
     add_mob_location(g->location_table, mob, g->room_table->rooms[1]);
 
     // when
-    do_south_action(g, create_request(North, mob, "south"));
+    do_south_action(g, create_request(NorthAction, mob, "south"));
 
     // then
     assert(mob->room == g->room_table->rooms[0]);
@@ -54,7 +54,7 @@ void test_mob_moves_east() {
     add_mob_location(g->location_table, mob, g->room_table->rooms[0]);
 
     // when
-    do_east_action(g, create_request(East, mob, "east"));
+    do_east_action(g, create_request(EastAction, mob, "east"));
 
     // then
     assert(mob->room == g->room_table->rooms[2]);
@@ -69,7 +69,7 @@ void test_mob_moves_west() {
     add_mob_location(g->location_table, mob, g->room_table->rooms[2]);
 
     // when
-    do_west_action(g, create_request(West, mob, "west"));
+    do_west_action(g, create_request(WestAction, mob, "west"));
 
     // then
     assert(mob->room == g->room_table->rooms[0]);
@@ -84,7 +84,7 @@ void test_mob_moves_up() {
     add_mob_location(g->location_table, mob, g->room_table->rooms[0]);
 
     // when
-    do_up_action(g, create_request(Up, mob, "up"));
+    do_up_action(g, create_request(UpAction, mob, "up"));
 
     // then
     assert(mob->room == g->room_table->rooms[3]);
@@ -99,7 +99,7 @@ void test_mob_moves_down() {
     add_mob_location(g->location_table, mob, g->room_table->rooms[3]);
 
     // when
-    do_down_action(g, create_request(Down, mob, "down"));
+    do_down_action(g, create_request(DownAction, mob, "down"));
 
     // then
     assert(mob->room == g->room_table->rooms[0]);
@@ -116,7 +116,7 @@ void test_invalid_move_does_nothing() {
     add_mob_location(g->location_table, c->mob, g->room_table->rooms[0]);
 
     // when
-    do_south_action(g, create_request(North, c->mob, "south"));
+    do_south_action(g, create_request(NorthAction, c->mob, "south"));
 
     // then
     assert(c->mob->room == g->room_table->rooms[0]);
@@ -133,7 +133,7 @@ void test_moving_sends_a_room_description_to_mob() {
     add_mob_location(g->location_table, c->mob, g->room_table->rooms[0]);
 
     // when
-    do_north_action(g, create_request(North, c->mob, "north"));
+    do_north_action(g, create_request(NorthAction, c->mob, "north"));
 
     // then
     MessageCollection *m = get_mock_message_collection();

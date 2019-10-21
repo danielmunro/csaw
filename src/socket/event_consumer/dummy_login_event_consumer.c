@@ -1,7 +1,7 @@
 #define START_ROOM_ID 1431
 
 void look_on_login(GameServiceT *game_service, Mob *mob) {
-    RequestT *request = create_request(Look, mob, "look");
+    RequestT *request = create_request(LookAction, mob, "look");
     do_look_action(game_service, request);
     free(request);
 }

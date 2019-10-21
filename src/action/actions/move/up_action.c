@@ -3,5 +3,5 @@ void do_up_action(GameServiceT *game_service, RequestT *request) {
 }
 
 ActionT *create_up_action() {
-    return create_action(Up, "up", do_up_action);
+    return create_action(UpAction, "up", do_up_action);
 }

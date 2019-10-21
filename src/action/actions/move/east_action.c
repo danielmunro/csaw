@@ -3,5 +3,5 @@ void do_east_action(GameServiceT *game_service, RequestT *request) {
 }
 
 ActionT *create_east_action() {
-    return create_action(East, "east", do_east_action);
+    return create_action(EastAction, "east", do_east_action);
 }

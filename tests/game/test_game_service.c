@@ -6,7 +6,7 @@ void test_get_action_sanity_1() {
     ActionT *action = get_action(game_service, "say");
 
     // then
-    assert(action->action_type == Say);
+    assert(action->action_type == SayAction);
 }
 
 void test_get_action_sanity_2() {
@@ -17,7 +17,7 @@ void test_get_action_sanity_2() {
     ActionT *action = get_action(game_service, "sa");
 
     // then
-    assert(action->action_type == Say);
+    assert(action->action_type == SayAction);
 }
 
 void test_get_action_sanity_3() {
@@ -28,7 +28,7 @@ void test_get_action_sanity_3() {
     ActionT *action = get_action(game_service, "s");
 
     // then
-    assert(action->action_type == South);
+    assert(action->action_type == SouthAction);
 }
 
 void test_get_action_sanity_4() {
