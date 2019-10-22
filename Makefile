@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.15.4/bin/cmake
+CMAKE_COMMAND = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.15.4/bin/cmake -E remove -f
+RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /Users/danmunro/projects/csaw
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/Cellar/cmake/3.15.4/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target test
 test:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/local/Cellar/cmake/3.15.4/bin/ctest --force-new-ctest-process $(ARGS)
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/ctest --force-new-ctest-process $(ARGS)
 .PHONY : test
 
 # Special rule for the target test
@@ -80,8 +80,8 @@ test/fast: test
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/local/Cellar/cmake/3.15.4/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -122,19 +122,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named coverage
-
-# Build rule for target.
-coverage: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 coverage
-.PHONY : coverage
-
-# fast build rule for target.
-coverage/fast:
-	$(MAKE) -f CMakeFiles/coverage.dir/build.make CMakeFiles/coverage.dir/build
-.PHONY : coverage/fast
-
-#=============================================================================
 # Target rules for targets named test_main
 
 # Build rule for target.
@@ -146,6 +133,32 @@ test_main: cmake_check_build_system
 test_main/fast:
 	$(MAKE) -f CMakeFiles/test_main.dir/build.make CMakeFiles/test_main.dir/build
 .PHONY : test_main/fast
+
+#=============================================================================
+# Target rules for targets named show-coverage
+
+# Build rule for target.
+show-coverage: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 show-coverage
+.PHONY : show-coverage
+
+# fast build rule for target.
+show-coverage/fast:
+	$(MAKE) -f CMakeFiles/show-coverage.dir/build.make CMakeFiles/show-coverage.dir/build
+.PHONY : show-coverage/fast
+
+#=============================================================================
+# Target rules for targets named create-coverage
+
+# Build rule for target.
+create-coverage: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 create-coverage
+.PHONY : create-coverage
+
+# fast build rule for target.
+create-coverage/fast:
+	$(MAKE) -f CMakeFiles/create-coverage.dir/build.make CMakeFiles/create-coverage.dir/build
+.PHONY : create-coverage/fast
 
 #=============================================================================
 # Target rules for targets named csaw
@@ -222,9 +235,10 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... test"
-	@echo "... coverage"
 	@echo "... test_main"
 	@echo "... edit_cache"
+	@echo "... show-coverage"
+	@echo "... create-coverage"
 	@echo "... csaw"
 	@echo "... src/main.o"
 	@echo "... src/main.i"

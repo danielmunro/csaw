@@ -37,16 +37,6 @@
 					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/projects/csaw/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="coverage">
-				<Option working_dir="/Users/danmunro/projects/csaw"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/Users/danmunro/projects/csaw/Makefile&quot;  VERBOSE=1 coverage"/>
-					<CompileFile command="/usr/bin/make -f &quot;/Users/danmunro/projects/csaw/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/Users/danmunro/projects/csaw/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/projects/csaw/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
 			<Target title="test_main">
 				<Option output="/Users/danmunro/projects/csaw/build/test_main" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="./build"/>
@@ -86,6 +76,26 @@
 				<Option type="4"/>
 				<MakeCommands>
 					<Build command="/usr/bin/make -f &quot;/Users/danmunro/projects/csaw/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/danmunro/projects/csaw/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/danmunro/projects/csaw/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/projects/csaw/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="show-coverage">
+				<Option working_dir="/Users/danmunro/projects/csaw"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/danmunro/projects/csaw/Makefile&quot;  VERBOSE=1 show-coverage"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/danmunro/projects/csaw/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/danmunro/projects/csaw/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/projects/csaw/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="create-coverage">
+				<Option working_dir="/Users/danmunro/projects/csaw"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/danmunro/projects/csaw/Makefile&quot;  VERBOSE=1 create-coverage"/>
 					<CompileFile command="/usr/bin/make -f &quot;/Users/danmunro/projects/csaw/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -f &quot;/Users/danmunro/projects/csaw/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/projects/csaw/Makefile&quot;  VERBOSE=1 clean"/>
