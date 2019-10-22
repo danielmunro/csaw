@@ -10,7 +10,7 @@
 #include "actions/move/up_action.c"
 #include "actions/move/down_action.c"
 #include "actions/look_action.c"
-#include "src/action/actions/look_at_mob_action.c"
+#include "actions/look_at_mob_action.c"
 #include "actions/repeat_action.c"
 
 #include "action_table.c"

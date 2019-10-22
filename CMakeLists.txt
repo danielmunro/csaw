@@ -3,6 +3,7 @@ project (CSaw)
 add_executable(csaw src/main.c)
 set(EXECUTABLE_OUTPUT_PATH ./build CACHE PATH "Build directory" FORCE)
 include_directories(.)
+set(CMAKE_C_COMPILER clang)
 
 include_directories(/usr/local/opt/libpq/include)
 find_package(PostgreSQL REQUIRED)
@@ -13,7 +14,8 @@ enable_testing()
 add_executable(test_main tests/test_main.c)
 add_test(NAME test_main COMMAND $<TARGET_FILE:test_main>)
 target_link_libraries(test_main ${PostgreSQL_LIBRARIES})
-target_link_options(test_main PRIVATE -fprofile-arcs -ftest-coverage)
+
+add_compile_options("-coverage")
 
 add_custom_target(coverage
         COMMAND lcov --capture --directory . --output-file coverage.info
