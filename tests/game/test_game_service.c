@@ -3,7 +3,7 @@ void test_get_action_sanity_1() {
     GameServiceT *game_service = create_game_service();
 
     // when
-    ActionT *action = get_action(game_service, "say");
+    ActionT *action = get_action(game_service, "say\n");
 
     // then
     assert(action->action_type == SayAction);
@@ -14,7 +14,7 @@ void test_get_action_sanity_2() {
     GameServiceT *game_service = create_game_service();
 
     // when
-    ActionT *action = get_action(game_service, "sa");
+    ActionT *action = get_action(game_service, "sa\n");
 
     // then
     assert(action->action_type == SayAction);
@@ -25,7 +25,7 @@ void test_get_action_sanity_3() {
     GameServiceT *game_service = create_game_service();
 
     // when
-    ActionT *action = get_action(game_service, "s");
+    ActionT *action = get_action(game_service, "s\n");
 
     // then
     assert(action->action_type == SouthAction);
@@ -36,10 +36,21 @@ void test_get_action_sanity_4() {
     GameServiceT *game_service = create_game_service();
 
     // when
-    ActionT *action = get_action(game_service, "floodle");
+    ActionT *action = get_action(game_service, "floodle\n");
 
     // then
     assert(action == 0);
+}
+
+void test_look_at_mob_sanity() {
+    // setup
+    GameServiceT *game_service = create_game_service();
+
+    // when
+    ActionT *action = get_action(game_service, "look foo\n");
+
+    // then
+    assert(action->action_type == LookAtMobAction);
 }
 
 void test_client_can_send_a_message_to_other_clients() {

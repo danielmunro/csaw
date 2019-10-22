@@ -2,6 +2,7 @@
 
 enum Word {
     ActionWord = 1,
+    MobInRoomWord,
     SubjectWord,
     ModifierWord,
     RemainingWords,
@@ -15,6 +16,9 @@ Words *create_words(int count, ...) {
     va_list ap;
     va_start(ap, count);
     Words *words = malloc(sizeof(Words));
+    for (int i = 0; i < MAX_WORDS; i++) {
+        words->word[i] = 0;
+    }
     for (int i = 0; i < count; i++) {
         words->word[i] = va_arg(ap, enum Word);
     }

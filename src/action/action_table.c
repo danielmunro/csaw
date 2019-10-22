@@ -20,6 +20,7 @@ ActionTable *create_action_table() {
 
     a->actions[10] = create_say_action();
     a->actions[20] = create_look_action();
+    a->actions[21] = create_look_at_mob_action();
     a->actions[30] = create_repeat_action();
     return a;
 }

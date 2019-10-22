@@ -75,11 +75,40 @@ ClientT *get_client_from_mob(GameServiceT *game_service, Mob *mob) {
     return NULL;
 }
 
-ActionT *get_action(GameServiceT *game_service, char *name_partial) {
+int word_matches_action(GameServiceT *game_service, ActionT *action, enum Word word, char *input) {
+    if (!word) {
+        return 0;
+    }
+    if (word == ActionWord) {
+        return strncmp(action->name, input, strlen(input) - 1) == 0;
+    }
+    if (word == MobInRoomWord) {
+        return 1;
+    }
+    return 0;
+}
+
+int words_match_action(GameServiceT *game_service, ActionT *action, char *input) {
+    char str[strlen(input)];
+    strcpy(str, input);
+    char *word = strtok(str, " ");
+    for (int j = 0; j < MAX_WORDS; j++) {
+        if (!action->words->word[j]) {
+            return word == NULL;
+        }
+        if (!word || !word_matches_action(game_service, action, action->words->word[j], word)) {
+            return 0;
+        }
+        word = strtok(NULL, " ");
+    }
+    return 1;
+}
+
+ActionT *get_action(GameServiceT *game_service, char *input) {
     for (int i = 0; i < MAX_ACTIONS; i++) {
         ActionT *action = game_service->action_table->actions[i];
-        if (action && strncmp(action->name, name_partial, strlen(name_partial)) == 0) {
-            return game_service->action_table->actions[i];
+        if (action && words_match_action(game_service, action, input)) {
+            return action;
         }
     }
     return NULL;

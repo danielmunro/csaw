@@ -7,6 +7,7 @@ enum ActionType {
     DownAction,
     SayAction,
     LookAction,
+    LookAtMobAction,
     RepeatAction,
     AnyAction,
     NoneAction,

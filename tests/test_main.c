@@ -33,6 +33,7 @@ void run_game_service_tests() {
             test_get_action_sanity_2,
             test_get_action_sanity_3,
             test_get_action_sanity_4,
+            test_look_at_mob_sanity,
             test_client_can_send_a_message_to_other_clients,
     };
     TestSuite *ts = create_test_suite(tests);
