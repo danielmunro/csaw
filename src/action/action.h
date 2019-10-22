@@ -1,3 +1,4 @@
+#include "word.c"
 #include "action.c"
 
 #include "actions/say_action.c"

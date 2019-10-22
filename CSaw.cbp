@@ -27,6 +27,26 @@
 					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/danmunro/github/csaw"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_main-coverage">
+				<Option working_dir="/Users/danmunro/github/csaw"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 test_main-coverage"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="test_main">
 				<Option output="/Users/danmunro/github/csaw/build/test_main" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="./build"/>
@@ -56,16 +76,6 @@
 				</Compiler>
 				<MakeCommands>
 					<Build command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 test_main/fast"/>
-					<CompileFile command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="rebuild_cache">
-				<Option working_dir="/Users/danmunro/github/csaw"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
 					<CompileFile command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -f &quot;/Users/danmunro/github/csaw/Makefile&quot;  VERBOSE=1 clean"/>

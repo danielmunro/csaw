@@ -9,5 +9,5 @@ void do_repeat_action(GameServiceT *game_service, Request *request) {
 }
 
 ActionT *create_repeat_action() {
-    return create_action(RepeatAction, "!", do_repeat_action);
+    return create_action(RepeatAction, "!", create_single_word(), do_repeat_action);
 }

@@ -3,5 +3,5 @@ void do_north_action(GameServiceT *game_service, Request *request) {
 }
 
 ActionT *create_north_action() {
-    return create_action(NorthAction, "north", do_north_action);
+    return create_action(NorthAction, "north", create_single_word(), do_north_action);
 }

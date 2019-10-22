@@ -8,5 +8,5 @@ void do_say_action(GameServiceT *game_service, Request *request) {
 }
 
 ActionT *create_say_action() {
-    return create_action(SayAction, "say", do_say_action);
+    return create_action(SayAction, "say", create_single_word(), do_say_action);
 }

@@ -6,5 +6,5 @@ void do_look_action(GameServiceT *game_service, Request *request) {
 }
 
 ActionT *create_look_action() {
-    return create_action(LookAction, "look", do_look_action);
+    return create_action(LookAction, "look", create_single_word(), do_look_action);
 }
