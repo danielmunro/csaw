@@ -6,13 +6,14 @@ include_directories(.)
 
 include_directories(/usr/local/opt/libpq/include)
 find_package(PostgreSQL REQUIRED)
-target_link_libraries(csaw PRIVATE ${PostgreSQL_LIBRARIES})
+target_link_libraries(csaw ${PostgreSQL_LIBRARIES})
 
 enable_testing()
 
 add_executable(test_main tests/test_main.c)
 add_test(NAME test_main COMMAND $<TARGET_FILE:test_main>)
-target_link_libraries(test_main PRIVATE ${PostgreSQL_LIBRARIES})
+target_link_libraries(test_main ${PostgreSQL_LIBRARIES})
+target_link_options(test_main PRIVATE -fprofile-arcs -ftest-coverage)
 
 add_custom_target(coverage
         COMMAND lcov --capture --directory . --output-file coverage.info
