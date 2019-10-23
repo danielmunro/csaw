@@ -17,7 +17,7 @@ void consume_input_to_action_event(GameServiceT *game_service, Event *event) {
             "input to action, mob: %s, event buffer: %s\n",
             get_object_name(event->mob->description),
             event->buffer);
-    ActionT *action = get_action(game_service, event->buffer);
+    ActionT *action = get_action_from_input_event(game_service, event);
     if (action) {
         dispatch_action_event(game_service, event, action);
         return;

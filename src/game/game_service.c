@@ -75,7 +75,7 @@ ClientT *get_client_from_mob(GameServiceT *game_service, Mob *mob) {
     return NULL;
 }
 
-int word_matches_action(GameServiceT *game_service, ActionT *action, enum Word word, char *input) {
+int word_matches_action(GameServiceT *game_service, ActionT *action, enum Word word, EventT *event, char *input) {
     if (!word) {
         return 0;
     }
@@ -83,20 +83,30 @@ int word_matches_action(GameServiceT *game_service, ActionT *action, enum Word w
         return strncmp(action->name, input, strlen(input) - 1) == 0;
     }
     if (word == MobInRoomWord) {
-        return 1;
+        for (int i = 0; i < MAX_MOBS_PER_ROOM; i++) {
+            Mob *mob = get_mob_by_room_and_index(game_service->location_table, event->mob->room, i);
+            if (!mob) {
+                return 0;
+            }
+            if (mob && strncmp(mob->description->name, input, strlen(input)) == 0) {
+                return 1;
+            }
+        }
     }
     return 0;
 }
 
-int words_match_action(GameServiceT *game_service, ActionT *action, char *input) {
-    char str[strlen(input)];
-    strcpy(str, input);
+int words_match_action(GameServiceT *game_service, ActionT *action, EventT *event) {
+    puts("sanity words_match_action");
+    char str[strlen(event->buffer)];
+    strcpy(str, event->buffer);
     char *word = strtok(str, " ");
+    debug_printf("word: %s\n", word);
     for (int j = 0; j < MAX_WORDS; j++) {
         if (!action->words->word[j]) {
             return word == NULL;
         }
-        if (!word || !word_matches_action(game_service, action, action->words->word[j], word)) {
+        if (!word || !word_matches_action(game_service, action, action->words->word[j], event, word)) {
             return 0;
         }
         word = strtok(NULL, " ");
@@ -104,10 +114,11 @@ int words_match_action(GameServiceT *game_service, ActionT *action, char *input)
     return 1;
 }
 
-ActionT *get_action(GameServiceT *game_service, char *input) {
+ActionT *get_action_from_input_event(GameServiceT *game_service, Event *event) {
     for (int i = 0; i < MAX_ACTIONS; i++) {
         ActionT *action = game_service->action_table->actions[i];
-        if (action && words_match_action(game_service, action, input)) {
+        puts("sanity get_action_from_input_event");
+        if (action && words_match_action(game_service, action, event)) {
             return action;
         }
     }

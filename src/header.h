@@ -24,7 +24,6 @@ typedef struct Client ClientT;
 typedef struct Server ServerT;
 void client_send_to_clients(GameServiceT *game_service, ClientT *client, char *buffer);
 ClientT *get_client(GameServiceT *game_service, int i);
-ActionT *get_action(GameServiceT *game_service, char *name_partial);
 ServerT *get_server(GameServiceT *game_service);
 
 /**
@@ -87,6 +86,7 @@ typedef struct Event EventT;
 void dispatch_event(GameServiceT *game_service, EventT *event);
 EventT *create_login_event(ClientT *client);
 EventT *create_client_input_event(ClientT *client, char *buffer);
+ActionT *get_action_from_input_event(GameServiceT *game_service, EventT *event); // game service
 
 EventConsumerT *create_input_to_action_event_consumer();
 EventConsumerT *create_dummy_login_event_consumer();

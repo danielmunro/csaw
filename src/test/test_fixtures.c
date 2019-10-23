@@ -12,6 +12,15 @@ Mob *create_test_mob() {
     return mob;
 }
 
+ClientT *create_test_client() {
+    struct sockaddr_in myaddr;
+    myaddr.sin_family = AF_INET;
+    myaddr.sin_port = htons(3490);
+    ClientT *client = new_client(myaddr, 0);
+    client->mob = create_test_mob();
+    return client;
+}
+
 Room *create_test_room() {
     uuid_t uuid;
     uuid_generate_random(uuid);
