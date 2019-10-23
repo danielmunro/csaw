@@ -3,7 +3,7 @@ void test_get_action_sanity_1() {
     GameServiceT *game_service = create_game_service();
 
     // when
-    ActionT *action = get_action_from_input_event(game_service, create_client_input_event(create_test_client(), "say\n"));
+    ActionT *action = get_action_from_input_event(game_service, create_client_input_event(create_test_client(), "say"));
 
     // then
     assert(action->action_type == SayAction);
@@ -14,7 +14,7 @@ void test_get_action_sanity_2() {
     GameServiceT *game_service = create_game_service();
 
     // when
-    ActionT *action = get_action_from_input_event(game_service, create_client_input_event(create_test_client(), "sa\n"));
+    ActionT *action = get_action_from_input_event(game_service, create_client_input_event(create_test_client(), "sa"));
 
     // then
     assert(action->action_type == SayAction);
@@ -25,7 +25,7 @@ void test_get_action_sanity_3() {
     GameServiceT *game_service = create_game_service();
 
     // when
-    ActionT *action = get_action_from_input_event(game_service, create_client_input_event(create_test_client(), "s\n"));
+    ActionT *action = get_action_from_input_event(game_service, create_client_input_event(create_test_client(), "s"));
 
     // then
     assert(action->action_type == SouthAction);
@@ -36,7 +36,7 @@ void test_get_action_sanity_4() {
     GameServiceT *game_service = create_game_service();
 
     // when
-    ActionT *action = get_action_from_input_event(game_service, create_client_input_event(create_test_client(), "floodle\n"));
+    ActionT *action = get_action_from_input_event(game_service, create_client_input_event(create_test_client(), "floodle"));
 
     // then
     assert(action == 0);
@@ -53,7 +53,7 @@ void test_look_at_mob_sanity() {
     add_mob_location(game_service->location_table, client->mob, room);
 
     // when
-    ActionT *action = get_action_from_input_event(game_service, create_client_input_event(client, "look foo\n"));
+    ActionT *action = get_action_from_input_event(game_service, create_client_input_event(client, "look foo"));
 
     // then
     assert(action->action_type == LookAtMobAction);

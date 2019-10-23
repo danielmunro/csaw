@@ -80,7 +80,7 @@ int word_matches_action(GameServiceT *game_service, ActionT *action, enum Word w
         return 0;
     }
     if (word == ActionWord) {
-        return strncmp(action->name, input, strlen(input) - 1) == 0;
+        return strncmp(action->name, input, strlen(input)) == 0;
     }
     if (word == MobInRoomWord) {
         for (int i = 0; i < MAX_MOBS_PER_ROOM; i++) {
@@ -88,8 +88,7 @@ int word_matches_action(GameServiceT *game_service, ActionT *action, enum Word w
             if (!mob) {
                 return 0;
             }
-            // @todo remove this hack after cleaning whitespace
-            if (strncmp(mob->description->name, input, strlen(input) - 1) == 0) {
+            if (strcmp(mob->description->name, input) == 0) {
                 return 1;
             }
         }
