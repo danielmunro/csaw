@@ -15,12 +15,13 @@ add_test(NAME test_main COMMAND $<TARGET_FILE:test_main>)
 target_link_libraries(test_main ${PostgreSQL_LIBRARIES})
 
 add_custom_command(
+        OUTPUT build/test_main
         OUTPUT test_main.gcno
-        COMMAND gcc -I/usr/local/opt/libpq/include -lpq -ftest-coverage -fprofile-arcs tests/test_main.c -o build/main_test)
+        COMMAND gcc -I/usr/local/opt/libpq/include -lpq -ftest-coverage -fprofile-arcs tests/test_main.c -o build/test_main)
 
 add_custom_command(
         OUTPUT test_main.gcda
-        COMMAND build/main_test
+        COMMAND build/test_main
         DEPENDS test_main.gcno)
 
 add_custom_command(
