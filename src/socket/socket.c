@@ -118,20 +118,16 @@ void end_client_session(Server *s, ClientT *c) {
 }
 
 void read_client_socket(Server *s, ClientT *client) {
-    puts("1");
-    char raw_buffer[MAX_READ_BUFFER + 1];
+    char raw_buffer[MAX_READ_BUFFER];
+    char buffer[MAX_READ_BUFFER];
     int value = read(client->socket, raw_buffer, MAX_READ_BUFFER);
-    puts("2");
     if (value == 0) {
         end_client_session(s, client);
         return;
     }
-    puts("3");
-    raw_buffer[value] = '\0';
-    printf("READ from client socket: '%s', %d\n", raw_buffer, value);
-    puts("4");
-    add_buffer_to_client(client, raw_buffer);
-    puts("5");
+    strncpy(buffer, raw_buffer, strlen(raw_buffer) - 1);
+    debug_printf("READ from client socket: '%s', %d\n", buffer, value);
+    add_buffer_to_client(client, buffer);
 }
 
 void check_clients(Server *s) {
