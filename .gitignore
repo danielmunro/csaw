@@ -51,10 +51,19 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-CMakeFiles/
 .idea/
 Testing/
 build/
+
+# coverage
 coverage.info
 test_main.gcno
 test_main.gcda
+
+# CMake madness
+CMakeFiles/
+cmake_install.cmake
+CMakeCache.txt
+CSaw.cbp
+CTestTestfile.cmake
+cmake-build-default/
