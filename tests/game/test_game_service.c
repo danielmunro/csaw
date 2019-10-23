@@ -44,13 +44,15 @@ void test_get_action_sanity_4() {
 
 void test_look_at_mob_sanity() {
     // setup
-    GameServiceT *game_service = create_game_service();
+    GameServiceT *game_service = create_game_service_with_test_area();
     ClientT *client = create_test_client();
-    Room *room = get_room(game_service->room_table, START_ROOM_ID);
-    client->mob->room = room;
+    Mob *mob = create_test_mob();
+    mob->description->name = "foo";
+    Room *room = game_service->room_table->rooms[0];
+    add_mob_location(game_service->location_table, mob, room);
+    add_mob_location(game_service->location_table, client->mob, room);
 
     // when
-    puts("SANITY");
     ActionT *action = get_action_from_input_event(game_service, create_client_input_event(client, "look foo\n"));
 
     // then

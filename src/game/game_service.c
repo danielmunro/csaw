@@ -88,7 +88,8 @@ int word_matches_action(GameServiceT *game_service, ActionT *action, enum Word w
             if (!mob) {
                 return 0;
             }
-            if (mob && strncmp(mob->description->name, input, strlen(input)) == 0) {
+            // @todo remove this hack after cleaning whitespace
+            if (strncmp(mob->description->name, input, strlen(input) - 1) == 0) {
                 return 1;
             }
         }
@@ -97,11 +98,9 @@ int word_matches_action(GameServiceT *game_service, ActionT *action, enum Word w
 }
 
 int words_match_action(GameServiceT *game_service, ActionT *action, EventT *event) {
-    puts("sanity words_match_action");
     char str[strlen(event->buffer)];
     strcpy(str, event->buffer);
     char *word = strtok(str, " ");
-    debug_printf("word: %s\n", word);
     for (int j = 0; j < MAX_WORDS; j++) {
         if (!action->words->word[j]) {
             return word == NULL;
@@ -117,7 +116,6 @@ int words_match_action(GameServiceT *game_service, ActionT *action, EventT *even
 ActionT *get_action_from_input_event(GameServiceT *game_service, Event *event) {
     for (int i = 0; i < MAX_ACTIONS; i++) {
         ActionT *action = game_service->action_table->actions[i];
-        puts("sanity get_action_from_input_event");
         if (action && words_match_action(game_service, action, event)) {
             return action;
         }
