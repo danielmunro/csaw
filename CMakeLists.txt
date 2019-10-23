@@ -14,10 +14,20 @@ add_executable(test_main tests/test_main.c)
 add_test(NAME test_main COMMAND $<TARGET_FILE:test_main>)
 target_link_libraries(test_main ${PostgreSQL_LIBRARIES})
 
-add_custom_target(create-coverage
-        COMMAND gcc -I/usr/local/opt/libpq/include -lpq -ftest-coverage -fprofile-arcs tests/test_main.c -o build/main_test;
-        COMMAND build/main_test;)
+add_custom_command(
+        OUTPUT test_main.gcno
+        COMMAND gcc -I/usr/local/opt/libpq/include -lpq -ftest-coverage -fprofile-arcs tests/test_main.c -o build/main_test)
 
-add_custom_target(show-coverage
-        COMMAND lcov --capture --directory . --output-file coverage.info
-        COMMAND lcov --list coverage.info)
+add_custom_command(
+        OUTPUT test_main.gcda
+        COMMAND build/main_test
+        DEPENDS test_main.gcno)
+
+add_custom_command(
+        OUTPUT coverage.info
+        COMMAND lcov --capture --directory . --output-file coverage.info;
+        DEPENDS test_main.gcda)
+
+add_custom_target(test-coverage
+        COMMAND lcov --list coverage.info
+        DEPENDS coverage.info)
